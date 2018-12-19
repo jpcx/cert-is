@@ -26,22 +26,26 @@
  * @example
  * const cert = require('cert-is')
  *
- * cert('foo').is('foo')                  // undefined
- * cert('foo').is('bar')                  // THROWS CertValueError
- * cert('foo').is('foo', 'bar')           // undefined
- * cert('foo').isNot('foo')               // THROWS CertValueError
- * cert('foo').isType('string')           // undefined
- * cert('foo').isType('number')           // THROWS CertTypeError
- * cert('foo').isType('string', 'number') // undefined
- * cert(new Map()).isType(Map)            // undefined
- * cert(new Map()).isType(Object)         // undefined
- * cert(new Map()).isType(Set)            // THROWS CertTypeError
- * cert(new Map()).isType(Map, Set)       // undefined
- * cert(15).isGT(2)                       // undefined
- * cert(15).isGT(15)                      // THROWS CertRangeError
- * cert(15).isGTE(15)                     // undefined
- * cert(15, 23).isGTE(15)                 // undefined
- * cert(15, 23).isGTE('foo')              // THROWS ArgTypeError
+ * cert('foo').is('foo')                      // undefined
+ * cert('foo').is('bar')                      // THROWS CertValueError
+ * cert('foo').is('foo', 'bar')               // undefined
+ * cert('foo').isNot('foo')                   // THROWS CertValueError
+ * cert('foo').isType('string')               // undefined
+ * cert('foo').isType('number')               // THROWS CertTypeError
+ * cert('foo').isType('string', 'number')     // undefined
+ * cert(new Map()).isType(Map)                // undefined
+ * cert(new Map()).isType(Object)             // undefined
+ * cert(new Map()).isType(Set)                // THROWS CertTypeError
+ * cert(new Map()).isType(Map, Set)           // undefined
+ * cert(15).isGT(2)                           // undefined
+ * cert(15).isGT(15)                          // THROWS CertRangeError
+ * cert(15).isGTE(15)                         // undefined
+ * cert(15, 23).isGTE(15)                     // undefined
+ * cert(15, 23).isGTE('foo')                  // THROWS ArgTypeError
+ * cert(15, 23).isRange(14, 24, false, false) // undefined
+ * cert(15, 23).isRange(15, 23, true, true)   // undefined
+ * cert(15, 23).isRange(15, 23, true, false)  // THROWS CertRangeError
+ * cert(15, 23).isRange(23, 15, true, true)   // THROWS ArgRangeError
  * @example
  * const check = require('cert-is').check
  *
@@ -453,7 +457,7 @@ class Certifier {
      * Certifies that ALL elements of `values` are greater than a provided lower bound. Throws if any element of `values` is NOT greater than the provided bound. Throws if any element of `values` is not a strict number type, or if `lower` is not a strict number type.
      *
      * @public
-     * @param  {number} bound - Bound used for range checking
+     * @param  {number} lower - Lower bound used for range checking
      * @throws {(CertRangeError|ArgTypeError)} Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
      */
     this.isGT = lower => checkRanges(values, lower, Infinity, false, true)
@@ -461,7 +465,7 @@ class Certifier {
      * Certifies that ALL elements of `values` are greater than or equal to a provided lower bound. Throws if any element of `values` is NOT greater or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `lower` is not a strict number type.
      *
      * @public
-     * @param  {number} bound - Bound used for range checking
+     * @param  {number} lower - Lower bound used for range checking
      * @throws {(CertRangeError|ArgTypeError)} Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
      */
     this.isGTE = lower => checkRanges(values, lower, Infinity, true, true)
@@ -469,7 +473,7 @@ class Certifier {
      * Certifies that ALL elements of `values` are less than a provided upper bound. Throws if any element of `values` is NOT less than the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
      *
      * @public
-     * @param  {number} bound - Bound used for range checking
+     * @param  {number} upper - Upper bound used for range checking
      * @throws {(CertRangeError|ArgTypeError)} Throws an CertRangeError if the test fails. Throws an ArgTypeError if `upper` is not a strict number type.
      */
     this.isLT = upper => checkRanges(values, -Infinity, upper, true, false)
