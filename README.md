@@ -72,7 +72,7 @@ cert(42, 32).isLT(37)
 cert(42).isLTE(32)
 cert(42, 22).isLTE(32)
 
-// Use the cert.check method for to avoid throwing errors (invalid argument errors will still throw)
+// Use the cert.check method to avoid throwing errors (invalid argument errors will still throw)
 cert.check('foo').is('foo', 'bar', 'baz') // returns true
 cert.check('foo').is('bar', 'baz')        // returns false
 ```
@@ -138,22 +138,26 @@ certifier.is('qux') // THROWS CertValueError
 ```javascript
 const cert = require('cert-is')
 
-cert('foo').is('foo')                  // undefined
-cert('foo').is('bar')                  // THROWS CertValueError
-cert('foo').is('foo', 'bar')           // undefined
-cert('foo').isNot('foo')               // THROWS CertValueError
-cert('foo').isType('string')           // undefined
-cert('foo').isType('number')           // THROWS CertTypeError
-cert('foo').isType('string', 'number') // undefined
-cert(new Map()).isType(Map)            // undefined
-cert(new Map()).isType(Object)         // undefined
-cert(new Map()).isType(Set)            // THROWS CertTypeError
-cert(new Map()).isType(Map, Set)       // undefined
-cert(15).isGT(2)                       // undefined
-cert(15).isGT(15)                      // THROWS CertRangeError
-cert(15).isGTE(15)                     // undefined
-cert(15, 23).isGTE(15)                 // undefined
-cert(15, 23).isGTE('foo')              // THROWS ArgTypeError
+cert('foo').is('foo')                      // undefined
+cert('foo').is('bar')                      // THROWS CertValueError
+cert('foo').is('foo', 'bar')               // undefined
+cert('foo').isNot('foo')                   // THROWS CertValueError
+cert('foo').isType('string')               // undefined
+cert('foo').isType('number')               // THROWS CertTypeError
+cert('foo').isType('string', 'number')     // undefined
+cert(new Map()).isType(Map)                // undefined
+cert(new Map()).isType(Object)             // undefined
+cert(new Map()).isType(Set)                // THROWS CertTypeError
+cert(new Map()).isType(Map, Set)           // undefined
+cert(15).isGT(2)                           // undefined
+cert(15).isGT(15)                          // THROWS CertRangeError
+cert(15).isGTE(15)                         // undefined
+cert(15, 23).isGTE(15)                     // undefined
+cert(15, 23).isGTE('foo')                  // THROWS ArgTypeError
+cert(15, 23).isRange(14, 24, false, false) // undefined
+cert(15, 23).isRange(15, 23, true, true)   // undefined
+cert(15, 23).isRange(15, 23, true, false)  // THROWS CertRangeError
+cert(15, 23).isRange(23, 15, true, true)   // THROWS ArgRangeError
 ```
 
 ```javascript
@@ -439,8 +443,7 @@ Certifies that ALL elements of `values` are greater than a provided lower bound.
 
 ##### Parameters
 
--   `lower`  
--   `bound` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Bound used for range checking
+-   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
 
 
 -   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
@@ -451,8 +454,7 @@ Certifies that ALL elements of `values` are greater than or equal to a provided 
 
 ##### Parameters
 
--   `lower`  
--   `bound` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Bound used for range checking
+-   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
 
 
 -   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
@@ -463,8 +465,7 @@ Certifies that ALL elements of `values` are less than a provided upper bound. Th
 
 ##### Parameters
 
--   `upper`  
--   `bound` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Bound used for range checking
+-   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking
 
 
 -   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `upper` is not a strict number type.
