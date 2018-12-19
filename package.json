@@ -1,6 +1,6 @@
 {
   "name": "cert-is",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.",
   "engines": {
     "node": ">=6.0.0"
@@ -8,9 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "serve-public-docs": "documentation serve --watch src/index.js -a public",
-    "serve-private-docs": "documentation serve --watch src/index.js -a public private protected undefined",
-    "write-public-api-docs": "documentation readme src/index.js -s API -a public --github"
+    "serve-public-docs": "documentation serve --watch index.js -a public",
+    "serve-private-docs": "documentation serve --watch index.js -a public private protected undefined",
+    "write-public-api-docs": "documentation readme index.js -s API -a public"
   },
   "keywords": [
     "assert",
