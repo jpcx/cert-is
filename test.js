@@ -312,7 +312,7 @@ describe('Equality Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_VALUE]: Value is invalid' ||
-            !(err instanceof cert.CertValueError) ||
+            !(err instanceof cert.ValueAssertionError) ||
             !(err.code === 'ERR_INVALID_VALUE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -338,7 +338,7 @@ describe('Equality Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_VALUE]: Value is invalid' ||
-            !(err instanceof cert.CertValueError) ||
+            !(err instanceof cert.ValueAssertionError) ||
             !(err.code === 'ERR_INVALID_VALUE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -356,7 +356,7 @@ describe('Equality Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_VALUE]: Value is invalid' ||
-            !(err instanceof cert.CertValueError) ||
+            !(err instanceof cert.ValueAssertionError) ||
             !(err.code === 'ERR_INVALID_VALUE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -383,7 +383,7 @@ describe('Equality Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_VALUE]: Value is invalid' ||
-            !(err instanceof cert.CertValueError) ||
+            !(err instanceof cert.ValueAssertionError) ||
             !(err.code === 'ERR_INVALID_VALUE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -888,7 +888,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -914,7 +914,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -933,7 +933,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -951,7 +951,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -978,7 +978,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -996,7 +996,7 @@ describe('Type Checking', () => {
         } catch (err) {
           if (
             err.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type' ||
-            !(err instanceof cert.CertTypeError) ||
+            !(err instanceof cert.TypeAssertionError) ||
             !(err.code === 'ERR_INVALID_TYPE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1063,7 +1063,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1080,7 +1080,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1097,7 +1097,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1114,7 +1114,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1134,7 +1134,7 @@ describe('Range Checking', () => {
             ) ||
             !(err.code === 'ERR_INVALID_ARG_RANGE') ||
             !(err.range === '32 < "upper" <= Infinity') ||
-            !(err instanceof cert.ArgRangeError)
+            !(err instanceof cert.RangeArgumentError)
           ) {
             throw Error('Invalid error returned by cert.isRange')
           }
@@ -1152,7 +1152,7 @@ describe('Range Checking', () => {
             ) ||
             !(err.code === 'ERR_INVALID_ARG_RANGE') ||
             !(err.range === '32 < "upper" <= Infinity') ||
-            !(err instanceof cert.ArgRangeError)
+            !(err instanceof cert.RangeArgumentError)
           ) {
             throw Error('Invalid error returned by cert.isRange')
           }
@@ -1169,7 +1169,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1188,7 +1188,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1207,7 +1207,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1226,7 +1226,7 @@ describe('Range Checking', () => {
           if (
             err.message !==
               '[ERR_INVALID_RANGE]: Value is of a prohibited range' ||
-            !(err instanceof cert.CertRangeError) ||
+            !(err instanceof cert.RangeAssertionError) ||
             !(err.code === 'ERR_INVALID_RANGE')
           ) {
             throw Error('Cert did not throw the correct error')
@@ -1248,7 +1248,7 @@ describe('Argument Error Checking', () => {
       if (
         err.message !==
           '[ERR_INVALID_ARG_TYPE]: "validTypes[0]" has an invalid type' ||
-        !(err instanceof cert.ArgTypeError) ||
+        !(err instanceof cert.TypeArgumentError) ||
         !(err.code === 'ERR_INVALID_ARG_TYPE')
       ) {
         throw Error('Cert did not throw the correct error')
@@ -1264,7 +1264,7 @@ describe('Argument Error Checking', () => {
     } catch (err) {
       if (
         err.message !== '[ERR_INVALID_ARG_TYPE]: "lower" has an invalid type' ||
-        !(err instanceof cert.ArgTypeError) ||
+        !(err instanceof cert.TypeArgumentError) ||
         !(err.code === 'ERR_INVALID_ARG_TYPE')
       ) {
         throw Error('Cert did not throw the correct error')
@@ -1281,7 +1281,7 @@ describe('Argument Error Checking', () => {
       if (
         err.message !==
           '[ERR_INVALID_ARG_TYPE]: "values[0]" has an invalid type' ||
-        !(err instanceof cert.ArgTypeError) ||
+        !(err instanceof cert.TypeArgumentError) ||
         !(err.code === 'ERR_INVALID_ARG_TYPE')
       ) {
         throw Error('Cert did not throw the correct error')
@@ -1292,171 +1292,171 @@ describe('Argument Error Checking', () => {
 })
 
 describe('Error Class Property Checking', () => {
-  describe('ArgValueError', () => {
+  describe('ValueArgumentError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.ArgValueError('foo')
+      const e = new cert.ValueArgumentError('foo')
       if (e.name !== 'Error') throw Error('[] does not have the correct name')
     })
     it('Contains the correct message', () => {
-      const e = new cert.ArgValueError('foo')
+      const e = new cert.ValueArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.ArgValueError('foo')
+      const e = new cert.ValueArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_VALUE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Contains the correct valid', () => {
-      const e = new cert.ArgValueError('foo', 'bar')
+      const e = new cert.ValueArgumentError('foo', 'bar')
       if (e.valid[0] !== 'bar') {
         throw Error('[] does not have the correct valid')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.ArgValueError('foo')
+      const e = new cert.ValueArgumentError('foo')
       if (!(e instanceof Error)) {
         throw Error('[] does not inherit the correct prototype')
       }
     })
   })
-  describe('ArgTypeError', () => {
+  describe('TypeArgumentError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.ArgTypeError('foo')
+      const e = new cert.TypeArgumentError('foo')
       if (e.name !== 'TypeError') {
         throw Error('[] does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.ArgTypeError('foo')
+      const e = new cert.TypeArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.ArgTypeError('foo')
+      const e = new cert.TypeArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_TYPE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Contains the correct validTypes', () => {
-      const e = new cert.ArgTypeError('foo', 'string')
+      const e = new cert.TypeArgumentError('foo', 'string')
       if (e.validTypes[0] !== 'string') {
         throw Error('[] does not have the correct validTypes')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.ArgTypeError('foo')
+      const e = new cert.TypeArgumentError('foo')
       if (!(e instanceof TypeError)) {
         throw Error('[] does not inherit the correct prototype')
       }
     })
   })
-  describe('ArgRangeError', () => {
+  describe('RangeArgumentError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.ArgRangeError('foo')
+      const e = new cert.RangeArgumentError('foo')
       if (e.name !== 'RangeError') {
         throw Error('[] does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.ArgRangeError('foo')
+      const e = new cert.RangeArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.ArgRangeError('foo')
+      const e = new cert.RangeArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_RANGE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Contains the correct range', () => {
-      const e = new cert.ArgRangeError('foo', 42, 84, true, false)
+      const e = new cert.RangeArgumentError('foo', 42, 84, true, false)
       if (e.range !== '42 <= "foo" < 84') {
         throw Error('[] does not have the correct valid')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.ArgRangeError('foo')
+      const e = new cert.RangeArgumentError('foo')
       if (!(e instanceof RangeError)) {
         throw Error('[] does not inherit the correct prototype')
       }
     })
   })
-  describe('CertValueError', () => {
+  describe('ValueAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.CertValueError('foo')
+      const e = new cert.ValueAssertionError('foo')
       if (e.name !== 'Error') throw Error('[] does not have the correct name')
     })
     it('Contains the correct message', () => {
-      const e = new cert.CertValueError('foo')
+      const e = new cert.ValueAssertionError('foo')
       if (e.message !== '[ERR_INVALID_VALUE]: Value is invalid') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.CertValueError('foo')
+      const e = new cert.ValueAssertionError('foo')
       if (e.code !== 'ERR_INVALID_VALUE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.CertValueError('foo')
+      const e = new cert.ValueAssertionError('foo')
       if (!(e instanceof Error)) {
         throw Error('[] does not inherit the correct prototype')
       }
     })
   })
-  describe('CertTypeError', () => {
+  describe('TypeAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.CertTypeError('foo')
+      const e = new cert.TypeAssertionError('foo')
       if (e.name !== 'TypeError') {
         throw Error('[] does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.CertTypeError('foo')
+      const e = new cert.TypeAssertionError('foo')
       if (e.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.CertTypeError('foo')
+      const e = new cert.TypeAssertionError('foo')
       if (e.code !== 'ERR_INVALID_TYPE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.CertTypeError('foo')
+      const e = new cert.TypeAssertionError('foo')
       if (!(e instanceof TypeError)) {
         throw Error('[] does not inherit the correct prototype')
       }
     })
   })
-  describe('CertRangeError', () => {
+  describe('RangeAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.CertRangeError('foo')
+      const e = new cert.RangeAssertionError('foo')
       if (e.name !== 'RangeError') {
         throw Error('[] does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.CertRangeError('foo')
+      const e = new cert.RangeAssertionError('foo')
       if (e.message !== '[ERR_INVALID_RANGE]: Value is of a prohibited range') {
         throw Error('[] does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.CertRangeError('foo')
+      const e = new cert.RangeAssertionError('foo')
       if (e.code !== 'ERR_INVALID_RANGE') {
         throw Error('[] does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.CertRangeError('foo')
+      const e = new cert.RangeAssertionError('foo')
       if (!(e instanceof RangeError)) {
         throw Error('[] does not inherit the correct prototype')
       }
@@ -1468,12 +1468,12 @@ describe('Module Property Checking', () => {
   it('Has all of the correct property names', () => {
     const allowed = [
       'check',
-      'ArgValueError',
-      'ArgTypeError',
-      'ArgRangeError',
-      'CertValueError',
-      'CertTypeError',
-      'CertRangeError'
+      'ValueArgumentError',
+      'TypeArgumentError',
+      'RangeArgumentError',
+      'ValueAssertionError',
+      'TypeAssertionError',
+      'RangeAssertionError'
     ]
     for (let key of Object.keys(cert)) {
       if (allowed.includes(key)) {
@@ -1489,12 +1489,12 @@ describe('Module Property Checking', () => {
   it('Has all of the correct property types', () => {
     const allowed = [
       ['check', 'function'],
-      ['ArgValueError', 'function'],
-      ['ArgTypeError', 'function'],
-      ['ArgRangeError', 'function'],
-      ['CertValueError', 'function'],
-      ['CertTypeError', 'function'],
-      ['CertRangeError', 'function']
+      ['ValueArgumentError', 'function'],
+      ['TypeArgumentError', 'function'],
+      ['RangeArgumentError', 'function'],
+      ['ValueAssertionError', 'function'],
+      ['TypeAssertionError', 'function'],
+      ['RangeAssertionError', 'function']
     ]
     for (let entry of allowed) {
       // eslint-disable-next-line valid-typeof
@@ -1716,6 +1716,72 @@ describe('Multiple Value Checking', () => {
           throw e
         }
       }
+    })
+  })
+})
+
+describe('Instance Return Checking', () => {
+  describe('Certifier Returns Instance', () => {
+    const instance = cert(0)
+    Object.freeze(instance)
+    it('Returns instance for cert.is', () => {
+      cert(instance).is(instance.is(0))
+    })
+    it('Returns instance for cert.isNot', () => {
+      cert(instance).is(instance.isNot(1))
+    })
+    it('Returns instance for cert.isType', () => {
+      cert(instance).is(instance.isType('number'))
+    })
+    it('Returns instance for cert.isNotType', () => {
+      cert(instance).is(instance.isNotType('string'))
+    })
+    it('Returns instance for cert.isRange', () => {
+      cert(instance).is(instance.isRange(-1, 1))
+    })
+    it('Returns instance for cert.isGT', () => {
+      cert(instance).is(instance.isGT(-1))
+    })
+    it('Returns instance for cert.isGTE', () => {
+      cert(instance).is(instance.isGTE(0))
+    })
+    it('Returns instance for cert.isLT', () => {
+      cert(instance).is(instance.isLT(1))
+    })
+    it('Returns instance for cert.isLTE', () => {
+      cert(instance).is(instance.isLTE(0))
+    })
+  })
+
+  describe('Checker Returns Instance', () => {
+    const instance = cert.check(0)
+    Object.freeze(instance)
+    it('Returns instance for cert.check().is', () => {
+      cert(instance).is(instance.is(0))
+    })
+    it('Returns instance for cert.check().isNot', () => {
+      cert(instance).is(instance.isNot(1))
+    })
+    it('Returns instance for cert.check().isType', () => {
+      cert(instance).is(instance.isType('number'))
+    })
+    it('Returns instance for cert.check().isNotType', () => {
+      cert(instance).is(instance.isNotType('string'))
+    })
+    it('Returns instance for cert.check().isRange', () => {
+      cert(instance).is(instance.isRange(-1, 1))
+    })
+    it('Returns instance for cert.check().isGT', () => {
+      cert(instance).is(instance.isGT(-1))
+    })
+    it('Returns instance for cert.check().isGTE', () => {
+      cert(instance).is(instance.isGTE(0))
+    })
+    it('Returns instance for cert.check().isLT', () => {
+      cert(instance).is(instance.isLT(1))
+    })
+    it('Returns instance for cert.check().isLTE', () => {
+      cert(instance).is(instance.isLTE(0))
     })
   })
 })
