@@ -1,8 +1,19 @@
 # Changelog
 
-<a name="0.1.2"></a>
+## <a name="0.2.0"></a> [0.2.0](https://github.com/jpcx/cert-is/tree/0.2.0) (2019-06-11)
 
-## [0.1.2](https://github.com/jpcx/cert-is/tree/0.1.2) (2018-12-19)
+| __[Changes since 0.1.2](https://github.com/jpcx/cert-is/compare/0.1.2...0.2.0)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.2.0) | [README](https://github.com/jpcx/cert-is/tree/0.2.0/README.md) |
+| --- | --- | --- |
+
+| [Source Code (zip)](https://github.com/jpcx/cert-is/archive/0.2.0.zip) | [Source Code (tar.gz)](https://github.com/jpcx/cert-is/archive/0.2.0.tar.gz) |
+| --- | --- |
+
+__Bugfixes:__
+
++ __cert-is__: All cert() and cert.check() functions return their instance in order to chain functions.
++ __NPM:__:    Updated own packages. Updated documentationjs packages in order to fix security vulnerability.
+
+## <a name="0.1.2"></a> [0.1.2](https://github.com/jpcx/cert-is/tree/0.1.2) (2018-12-19)
 
 | __[Changes since 0.1.1](https://github.com/jpcx/cert-is/compare/0.1.1...0.1.2)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.1.2) | [README](https://github.com/jpcx/cert-is/tree/0.1.2/README.md) |
 | --- | --- | --- |
@@ -14,9 +25,7 @@ __Bugfixes:__
 
 + __CHANGELOG:__ Fixed release dates.
 
-<a name="0.1.1"></a>
-
-## [0.1.1](https://github.com/jpcx/cert-is/tree/0.1.1) (2018-12-19)
+## <a name="0.1.1"></a> [0.1.1](https://github.com/jpcx/cert-is/tree/0.1.1) (2018-12-19)
 
 | __[Changes since 0.1.0](https://github.com/jpcx/cert-is/compare/0.1.0...0.1.1)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.1.1) | [README](https://github.com/jpcx/cert-is/tree/0.1.1/README.md) |
 | --- | --- | --- |
@@ -31,9 +40,7 @@ __Bugfixes:__
 + __NPM:__     Removed reference to src/index.js.
 + __Package:__ Removed unnecessary file.
 
-<a name="0.1.0"></a>
-
-## [0.1.0](https://github.com/jpcx/cert-is/tree/0.1.0) (2018-12-18)
+## <a name="0.1.0"></a> [0.1.0](https://github.com/jpcx/cert-is/tree/0.1.0) (2018-12-18)
 
 | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.1.0) | [README](https://github.com/jpcx/cert-is/blob/0.1.0/README.md) |
 | --- | --- |

@@ -30,7 +30,7 @@ npm test
 ```js
 const cert = require('cert-is')
 
-// All of the following calls return nothing (undefined)
+// All of the following calls return cert() instance
 cert('foo').is('foo', 'bar', 'baz')
 cert('foo', 42).is('foo', 'bar', 'baz', 42)
 cert('foo').isNot('qux', 'quz')
@@ -73,8 +73,27 @@ cert(42).isLTE(32)
 cert(42, 22).isLTE(32)
 
 // Use the cert.check method to avoid throwing errors (invalid argument errors will still throw)
-cert.check('foo').is('foo', 'bar', 'baz') // returns true
+cert.check('foo').is('foo', 'bar', 'baz') // returns cert.check() instance
 cert.check('foo').is('bar', 'baz')        // returns false
+
+// All cert() and cert.check() methods return their instance if a given test passes
+// As such, multiple tests may be appended to eachother
+
+// Returns cert() instance
+cert(42).is(42).isGT(41).isLT(43).isType('number', Number)
+
+// Throws a ValueAssertionError
+cert(42).is('not42').isGT(41).isLT(43).isType('number', Number)
+
+// Throws a TypeAssertionError
+cert(42).is('not42').isGT(41).isLT(43).isType('string')
+
+// Returns cert.check() instance
+cert.check(42).is(42).isGT(41).isLT(43).isType('number', Number)
+
+// Returns false
+cert.check(42).is('not42').isGT(41).isLT(43).isType('number', Number)
+cert.check(42).is(42).isGT(41).isLT(43).isType('string')
 ```
 
 ## API
@@ -85,12 +104,12 @@ cert.check('foo').is('bar', 'baz')        // returns false
 
 -   [cert-is](#cert-is)
 -   [Type](#type)
--   [ArgValueError](#argvalueerror)
--   [ArgTypeError](#argtypeerror)
--   [ArgRangeError](#argrangeerror)
--   [CertValueError](#certvalueerror)
--   [CertTypeError](#certtypeerror)
--   [CertRangeError](#certrangeerror)
+-   [ValueArgumentError](#valueargumenterror)
+-   [TypeArgumentError](#typeargumenterror)
+-   [RangeArgumentError](#rangeargumenterror)
+-   [ValueAssertionError](#valueassertionerror)
+-   [TypeAssertionError](#typeassertionerror)
+-   [RangeAssertionError](#rangeassertionerror)
 -   [Certifier](#certifier)
     -   [is](#is)
     -   [isNot](#isnot)
@@ -117,12 +136,12 @@ Provides a collection of assertion tools for checking strict equality, type, and
 #### Properties
 
 -   `check` **[check](#check)** Constructs a new Checker instance.
--   `ArgValueError` **[ArgValueError](#argvalueerror)** Reference to the ArgValueError class.
--   `ArgTypeError` **[ArgTypeError](#argtypeerror)** Reference to the ArgTypeError class.
--   `ArgRangeError` **[ArgRangeError](#argrangeerror)** Reference to the ArgRangeError class.
--   `CertValueError` **[CertValueError](#certvalueerror)** Reference to the CertValueError class.
--   `CertTypeError` **[CertTypeError](#certtypeerror)** Reference to the CertTypeError class.
--   `CertRangeError` **[CertRangeError](#certrangeerror)** Reference to the CertRangeError class.
+-   `ValueArgumentError` **[ValueArgumentError](#valueargumenterror)** Reference to the ValueArgumentError class.
+-   `TypeArgumentError` **[TypeArgumentError](#typeargumenterror)** Reference to the TypeArgumentError class.
+-   `RangeArgumentError` **[RangeArgumentError](#rangeargumenterror)** Reference to the RangeArgumentError class.
+-   `ValueAssertionError` **[ValueAssertionError](#valueassertionerror)** Reference to the ValueAssertionError class.
+-   `TypeAssertionError` **[TypeAssertionError](#typeassertionerror)** Reference to the TypeAssertionError class.
+-   `RangeAssertionError` **[RangeAssertionError](#rangeassertionerror)** Reference to the RangeAssertionError class.
 
 #### Examples
 
@@ -132,42 +151,52 @@ const cert = require('cert-is')
 const certifier = cert('foo', 'bar')
 certifier.is('foo') // undefined
 certifier.is('bar') // undefined
-certifier.is('qux') // THROWS CertValueError
+certifier.is('qux') // THROWS ValueAssertionError
 ```
 
 ```javascript
 const cert = require('cert-is')
 
-cert('foo').is('foo')                      // undefined
-cert('foo').is('bar')                      // THROWS CertValueError
-cert('foo').is('foo', 'bar')               // undefined
-cert('foo').isNot('foo')                   // THROWS CertValueError
-cert('foo').isType('string')               // undefined
-cert('foo').isType('number')               // THROWS CertTypeError
-cert('foo').isType('string', 'number')     // undefined
-cert(new Map()).isType(Map)                // undefined
-cert(new Map()).isType(Object)             // undefined
-cert(new Map()).isType(Set)                // THROWS CertTypeError
-cert(new Map()).isType(Map, Set)           // undefined
-cert(15).isGT(2)                           // undefined
-cert(15).isGT(15)                          // THROWS CertRangeError
-cert(15).isGTE(15)                         // undefined
-cert(15, 23).isGTE(15)                     // undefined
-cert(15, 23).isGTE('foo')                  // THROWS ArgTypeError
-cert(15, 23).isRange(14, 24, false, false) // undefined
-cert(15, 23).isRange(15, 23, true, true)   // undefined
-cert(15, 23).isRange(15, 23, true, false)  // THROWS CertRangeError
-cert(15, 23).isRange(23, 15, true, true)   // THROWS ArgRangeError
+cert('foo').is('foo')                      // returns cert() instance
+cert('foo').is('bar')                      // THROWS ValueAssertionError
+cert('foo').is('foo', 'bar')               // returns cert() instance
+cert('foo').isNot('foo')                   // THROWS ValueAssertionError
+cert('foo').isType('string')               // returns cert() instance
+cert('foo').isType('number')               // THROWS TypeAssertionError
+cert('foo').isType('string', 'number')     // returns cert() instance
+cert(new Map()).isType(Map)                // returns cert() instance
+cert(new Map()).isType(Object)             // returns cert() instance
+cert(new Map()).isType(Set)                // THROWS TypeAssertionError
+cert(new Map()).isType(Map, Set)           // returns cert() instance
+cert(15).isGT(2)                           // returns cert() instance
+cert(15).isGT(15)                          // THROWS RangeAssertionError
+cert(15).isGTE(15)                         // returns cert() instance
+cert(15, 23).isGTE(15)                     // returns cert() instance
+cert(15, 23).isGTE('foo')                  // THROWS TypeArgumentError
+cert(15, 23).isRange(14, 24, false, false) // returns cert() instance
+cert(15, 23).isRange(15, 23, true, true)   // returns cert() instance
+cert(15, 23).isRange(15, 23, true, false)  // THROWS RangeAssertionError
+cert(15, 23).isRange(23, 15, true, true)   // THROWS RangeArgumentError
 ```
 
 ```javascript
 const check = require('cert-is').check
 
-check('foo').is('foo')        // true
-check('foo').is('bar')        // false
-check('foo').isType('string') // true
-check('foo').isType('bar')    // THROWS ArgTypeError
-check('foo').isGT('')         // THROWS ArgTypeError
+check('foo').is('foo')        // returns true
+check('foo').is('bar')        // returns check() instance
+check('foo').isType('string') // returns true
+check('foo').isType('bar')    // THROWS TypeArgumentError
+check('foo').isGT('')         // THROWS TypeArgumentError
+```
+
+```javascript
+const cert = require('cert-is')
+const check = cert.check
+
+cert(15).isGT(2).isLT(18).isType('number')     // returns cert() instance
+cert(15).isGT(2).isLT(-9000).isType('number')  // throws RangeAssertionError
+check(15).isGT(2).isLT(18).isType('number')    // returns check() instance
+check(15).isGT(2).isLT(-9000).isType('number') // returns false
 ```
 
 Returns **[Certifier](#certifier)** Instance of the [Certifier](#certifier) class that contains methods for certifying the provided values.
@@ -193,7 +222,7 @@ Type: (`"boolean"` \| `"undefined"` \| `"number"` \| `"string"` \| `"symbol"` \|
 Array
 ```
 
-### ArgValueError
+### ValueArgumentError
 
 **Extends Error**
 
@@ -214,21 +243,21 @@ Thrown when an argument's value is not an acceptable value.
 #### Examples
 
 ```javascript
-const e = new ArgValueError('foo')
+const e = new ValueArgumentError('foo')
 e.name    // 'Error'
 e.message // '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value'
 e.code    // 'ERR_INVALID_ARG_VALUE'
 ```
 
 ```javascript
-const e = new ArgValueError('foo', 'bar')
+const e = new ValueArgumentError('foo', 'bar')
 e.name    // 'Error'
 e.message // '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value'
 e.code    // 'ERR_INVALID_ARG_VALUE'
 e.valid   // ['bar']
 ```
 
-### ArgTypeError
+### TypeArgumentError
 
 **Extends TypeError**
 
@@ -249,21 +278,21 @@ Thrown when an argument's type is not an acceptable type.
 #### Examples
 
 ```javascript
-const e = new ArgTypeError('foo')
+const e = new TypeArgumentError('foo')
 e.name    // 'TypeError'
 e.message // '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type'
 e.code    // 'ERR_INVALID_ARG_TYPE'
 ```
 
 ```javascript
-const e = new ArgTypeError('foo', 'string', 'number')
+const e = new TypeArgumentError('foo', 'string', 'number')
 e.name       // 'TypeError'
 e.message    // '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type'
 e.code       // 'ERR_INVALID_ARG_TYPE'
 e.validTypes // ['string', 'number']
 ```
 
-### ArgRangeError
+### RangeArgumentError
 
 **Extends RangeError**
 
@@ -287,28 +316,28 @@ Thrown when an argument's range is not within an acceptable range.
 #### Examples
 
 ```javascript
-const e = new ArgRangeError('foo')
+const e = new RangeArgumentError('foo')
 e.name    // 'RangeError'
 e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
 e.code    // 'ERR_INVALID_ARG_RANGE'
 ```
 
 ```javascript
-const e = new ArgRangeError('foo', 42)
+const e = new RangeArgumentError('foo', 42)
 e.name    // 'RangeError'
 e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
 e.code    // 'ERR_INVALID_ARG_RANGE'
 ```
 
 ```javascript
-const e = new ArgRangeError('foo', 42, 84, true, false)
+const e = new RangeArgumentError('foo', 42, 84, true, false)
 e.name    // 'RangeError'
 e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
 e.code    // 'ERR_INVALID_ARG_RANGE'
 e.range   // `42 <= 'foo' < 84`
 ```
 
-### CertValueError
+### ValueAssertionError
 
 **Extends Error**
 
@@ -323,13 +352,13 @@ Thrown when the certifier finds a value is either not expected or is explicitly 
 #### Examples
 
 ```javascript
-const e = new CertValueError()
+const e = new ValueAssertionError()
 e.name    // 'Error'
 e.message // '[ERR_INVALID_VALUE]: Value is invalid'
 e.code    // 'ERR_INVALID_VALUE'
 ```
 
-### CertTypeError
+### TypeAssertionError
 
 **Extends TypeError**
 
@@ -344,13 +373,13 @@ Thrown when the certifier finds a value with a type that is either not expected 
 #### Examples
 
 ```javascript
-const e = new CertTypeError()
+const e = new TypeAssertionError()
 e.name    // 'TypeError'
 e.message // '[ERR_INVALID_TYPE]: Value is of an invalid type'
 e.code    // 'ERR_INVALID_TYPE'
 ```
 
-### CertRangeError
+### RangeAssertionError
 
 **Extends RangeError**
 
@@ -365,7 +394,7 @@ Thrown when the certifier finds a value that is not within an expected range.
 #### Examples
 
 ```javascript
-const e = new CertRangeError()
+const e = new RangeAssertionError()
 e.name    // 'RangeError'
 e.message // '[ERR_INVALID_RANGE]: Value is of a prohibited range'
 e.code    // 'ERR_INVALID_RANGE'
@@ -388,7 +417,9 @@ Certifies that ALL elements of `values` are strictly equal to any element of `al
 -   `valid` **...any** Allowed values.
 
 
--   Throws **[CertValueError](#certvalueerror)** Throws an CertValueError if the test fails.
+-   Throws **[ValueAssertionError](#valueassertionerror)** Throws an ValueAssertionError if the test fails.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isNot
 
@@ -399,7 +430,9 @@ Certifies that All elements of `values` are not strictly equal to any element of
 -   `invalid` **...any** Prohibited values.
 
 
--   Throws **[CertValueError](#certvalueerror)** Throws an CertValueError if the test fails.
+-   Throws **[ValueAssertionError](#valueassertionerror)** Throws an ValueAssertionError if the test fails.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isType
 
@@ -410,7 +443,9 @@ Certifies that ALL elements of `values` match any type in `validTypes`. Throws i
 -   `validTypes` **...[Type](#type)** Allowed types.
 
 
--   Throws **([CertTypeError](#certtypeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertTypeError if the test fails. Throws an ArgTypeError if any element of `validTypes` is not a string or function.
+-   Throws **([TypeAssertionError](#typeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an TypeAssertionError if the test fails. Throws an TypeArgumentError if any element of `validTypes` is not a string or function.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isNotType
 
@@ -421,7 +456,9 @@ Certified that All elements of `values` DO NOT match any type in `invalidTypes`.
 -   `invalidTypes` **...[Type](#type)** Prohibited types.
 
 
--   Throws **([CertTypeError](#certtypeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertTypeError if the test fails. Throws an ArgTypeError if any element of `prohibitedTypes` is not a string or function.
+-   Throws **([TypeAssertionError](#typeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an TypeAssertionError if the test fails. Throws an TypeArgumentError if any element of `prohibitedTypes` is not a string or function.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isRange
 
@@ -435,7 +472,9 @@ Certifies that ALL elements of `values` are within the provided range. Either bo
 -   `upIncl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Whether or not the upper bound is inclusive. (optional, default `false`)
 
 
--   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if any element of `values`, `lower`, or `upper` are not strict number types. Throws an ArgTypeError if either `lowIncl` or `upIncl` are not strict boolean types. Throws an ArgRangeError if `upper` is less than `lower`, or if `upper` is equal to `lower` and either are exclusive.
+-   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if any element of `values`, `lower`, or `upper` are not strict number types. Throws an TypeArgumentError if either `lowIncl` or `upIncl` are not strict boolean types. Throws an RangeArgumentError if `upper` is less than `lower`, or if `upper` is equal to `lower` and either are exclusive.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isGT
 
@@ -446,7 +485,9 @@ Certifies that ALL elements of `values` are greater than a provided lower bound.
 -   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
 
 
--   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
+-   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `lower` is not a strict number type.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isGTE
 
@@ -457,7 +498,9 @@ Certifies that ALL elements of `values` are greater than or equal to a provided 
 -   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
 
 
--   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `lower` is not a strict number type.
+-   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `lower` is not a strict number type.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isLT
 
@@ -468,7 +511,9 @@ Certifies that ALL elements of `values` are less than a provided upper bound. Th
 -   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking
 
 
--   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `upper` is not a strict number type.
+-   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `upper` is not a strict number type.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isLTE
 
@@ -479,7 +524,9 @@ Certifies that ALL elements of `values` are less than or equal to a provided upp
 -   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking
 
 
--   Throws **([CertRangeError](#certrangeerror) \| [ArgTypeError](#argtypeerror))** Throws an CertRangeError if the test fails. Throws an ArgTypeError if `upper` is not a strict number type.
+-   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `upper` is not a strict number type.
+
+Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 ### Checker
 
@@ -492,9 +539,9 @@ Provides an interface for the Certifier class that performs a given test on the 
 -   `values` **...any** Values to certify.
 
 
--   Throws **[ArgTypeError](#argtypeerror)** Throws an ArgTypeError if the supplied arguments are invalid.
+-   Throws **[TypeArgumentError](#typeargumenterror)** Throws an TypeArgumentError if the supplied arguments are invalid.
 
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Returns the result of the certification as a boolean.
+Returns **([Checker](#checker) \| `false`)** Returns the instance for re-use (truthy), or false if the check fails (falsy).
 
 ### check
 
@@ -510,7 +557,7 @@ Constructs a new Checker instance in order to perform tests without throwing tes
 check('foo').is('bar')        // false
 check('foo').is('bar', 'foo') // true
 check(123).isGT(42)           // true
-check(123).isGT('foo')        // THROWS ArgTypeError
+check(123).isGT('foo')        // THROWS TypeArgumentError
 ```
 
 Returns **[Checker](#checker)** Returns a new Checker instance with Certifier instance methods capable of testing the supplied values.

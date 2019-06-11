@@ -1,6 +1,6 @@
 {
   "name": "cert-is",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.",
   "engines": {
     "node": ">=6.0.0"
@@ -8,9 +8,11 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "build": "sh scripts/build.sh",
+    "prepare": "npm test && npm run-script build",
     "serve-public-docs": "documentation serve --watch index.js -a public",
     "serve-private-docs": "documentation serve --watch index.js -a public private protected undefined",
-    "write-public-api-docs": "documentation readme index.js -s API -a public"
+    "write-public-api-docs": "documentation readme index.js -s API -a public --github"
   },
   "keywords": [
     "assert",
@@ -23,7 +25,8 @@
     "check",
     "typecheck",
     "range",
-    "between"
+    "between",
+    "error"
   ],
   "author": "Justin Collier",
   "license": "MIT",
@@ -33,8 +36,8 @@
     "email": "jpcxist@gmail.com"
   },
   "devDependencies": {
-    "documentation": "^9.0.0",
-    "mocha": "^5.2.0",
+    "documentation": "^11.0.0",
+    "mocha": "^6.1.4",
     "standard": "^12.0.1"
   },
   "dependencies": {}
