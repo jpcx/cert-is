@@ -11,6 +11,8 @@ Provides a collection of assertion tools for checking strict equality, type, and
 [![NPM](https://img.shields.io/david/jpcx/cert-is.svg)](https://www.npmjs.com/package/cert-is/)
 [![NPM](https://img.shields.io/david/dev/jpcx/cert-is.svg)](https://www.npmjs.com/package/cert-is/)
 
+**Migration Notice:** The error naming scheme has changed from 0.1.2 --> 0.2.1. Please see the [API Documentation](#api) for the new names.
+
 ## Installation
 
 ```console
@@ -77,7 +79,7 @@ cert.check('foo').is('foo', 'bar', 'baz') // returns cert.check() instance
 cert.check('foo').is('bar', 'baz')        // returns false
 
 // All cert() and cert.check() methods return their instance if a given test passes
-// As such, multiple tests may be appended to eachother
+// As such, multiple tests may be appended to each other
 
 // Returns cert() instance
 cert(42).is(42).isGT(41).isLT(43).isType('number', Number)

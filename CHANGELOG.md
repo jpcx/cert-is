@@ -1,5 +1,19 @@
 # Changelog
 
+## <a name="0.2.1"></a> [0.2.1](https://github.com/jpcx/cert-is/tree/0.2.1) (2019-06-11)
+
+| __[Changes since 0.2.0](https://github.com/jpcx/cert-is/compare/0.2.0...0.2.1)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.2.1) | [README](https://github.com/jpcx/cert-is/tree/0.2.1/README.md) |
+| --- | --- | --- |
+
+| [Source Code (zip)](https://github.com/jpcx/cert-is/archive/0.2.1.zip) | [Source Code (tar.gz)](https://github.com/jpcx/cert-is/archive/0.2.1.tar.gz) |
+| --- | --- |
+
+__Bugfixes:__
+
++ __CHANGELOG:__ Included Error name changes in changelog. Split Features / Bugfixes.
++ __README:__    Added migration notice for 0.1.2 --> 0.2.1.
++ __README:__    Fixed typo.
+
 ## <a name="0.2.0"></a> [0.2.0](https://github.com/jpcx/cert-is/tree/0.2.0) (2019-06-11)
 
 | __[Changes since 0.1.2](https://github.com/jpcx/cert-is/compare/0.1.2...0.2.0)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.2.0) | [README](https://github.com/jpcx/cert-is/tree/0.2.0/README.md) |
@@ -8,10 +22,14 @@
 | [Source Code (zip)](https://github.com/jpcx/cert-is/archive/0.2.0.zip) | [Source Code (tar.gz)](https://github.com/jpcx/cert-is/archive/0.2.0.tar.gz) |
 | --- | --- |
 
+__Features:__
+
++ __cert-is:__ All cert() and cert.check() functions return their instance in order to chain functions.
++ __cert-is:__ Changed error naming scheme: CertValueError --> ValueAssertionError, etc.
+
 __Bugfixes:__
 
-+ __cert-is__: All cert() and cert.check() functions return their instance in order to chain functions.
-+ __NPM:__:    Updated own packages. Updated documentationjs packages in order to fix security vulnerability.
++ __NPM:__    Updated own packages. Updated documentationjs packages in order to fix security vulnerability.
 
 ## <a name="0.1.2"></a> [0.1.2](https://github.com/jpcx/cert-is/tree/0.1.2) (2018-12-19)
 
