@@ -96,6 +96,13 @@ cert.check(42).is(42).isGT(41).isLT(43).isType('number', Number)
 // Returns false
 cert.check(42).is('not42').isGT(41).isLT(43).isType('number', Number)
 cert.check(42).is(42).isGT(41).isLT(43).isType('string')
+
+// Load a message with cert.message in order to customize the error message
+ // Throws ValueAssertionError with message: [ERR_INVALID_VALUE]: 42 is not not 42
+cert(42).message('42 is not not 42').isNot(42)
+cert(42).message('42 is not not 42').is(42)          // returns cert() instance
+cert.check(42).message('42 is not not 42').is(42)    // returns cert.check() instance
+cert.check(42).message('42 is not not 42').isNot(42) // returns false
 ```
 
 ## API
@@ -529,6 +536,17 @@ Certifies that ALL elements of `values` are less than or equal to a provided upp
 -   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `upper` is not a strict number type.
 
 Returns **[Certifier](#certifier)** Returns instance for re-use.
+
+### 
+
+Loads a message into the certifier to provide additional context for
+thrown AssertionErrors.
+
+#### Parameters
+
+-   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message to load.
+
+Returns **[Certifier](#certifier)** 
 
 ### Checker
 
