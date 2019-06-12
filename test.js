@@ -1295,30 +1295,32 @@ describe('Error Class Property Checking', () => {
   describe('ValueArgumentError', () => {
     it('Contains the correct name', () => {
       const e = new cert.ValueArgumentError('foo')
-      if (e.name !== 'Error') throw Error('[] does not have the correct name')
+      if (e.name !== 'Error') {
+        throw Error('ValueArgumentError does not have the correct name')
+      }
     })
     it('Contains the correct message', () => {
       const e = new cert.ValueArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value') {
-        throw Error('[] does not have the correct message')
+        throw Error('ValueArgumentError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
       const e = new cert.ValueArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_VALUE') {
-        throw Error('[] does not have the correct code')
+        throw Error('ValueArgumentError does not have the correct code')
       }
     })
     it('Contains the correct valid', () => {
       const e = new cert.ValueArgumentError('foo', 'bar')
       if (e.valid[0] !== 'bar') {
-        throw Error('[] does not have the correct valid')
+        throw Error('ValueArgumentError does not have the correct valid')
       }
     })
     it('Inherits the correct prototype', () => {
       const e = new cert.ValueArgumentError('foo')
       if (!(e instanceof Error)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error('ValueArgumentError does not inherit the correct prototype')
       }
     })
   })
@@ -1326,31 +1328,31 @@ describe('Error Class Property Checking', () => {
     it('Contains the correct name', () => {
       const e = new cert.TypeArgumentError('foo')
       if (e.name !== 'TypeError') {
-        throw Error('[] does not have the correct name')
+        throw Error('TypeArgumentError does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
       const e = new cert.TypeArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type') {
-        throw Error('[] does not have the correct message')
+        throw Error('TypeArgumentError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
       const e = new cert.TypeArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_TYPE') {
-        throw Error('[] does not have the correct code')
+        throw Error('TypeArgumentError does not have the correct code')
       }
     })
     it('Contains the correct validTypes', () => {
       const e = new cert.TypeArgumentError('foo', 'string')
       if (e.validTypes[0] !== 'string') {
-        throw Error('[] does not have the correct validTypes')
+        throw Error('TypeArgumentError does not have the correct validTypes')
       }
     })
     it('Inherits the correct prototype', () => {
       const e = new cert.TypeArgumentError('foo')
       if (!(e instanceof TypeError)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error('TypeArgumentError does not inherit the correct prototype')
       }
     })
   })
@@ -1358,107 +1360,131 @@ describe('Error Class Property Checking', () => {
     it('Contains the correct name', () => {
       const e = new cert.RangeArgumentError('foo')
       if (e.name !== 'RangeError') {
-        throw Error('[] does not have the correct name')
+        throw Error('RangeArgumentError does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
       const e = new cert.RangeArgumentError('foo')
       if (e.message !== '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range') {
-        throw Error('[] does not have the correct message')
+        throw Error('RangeArgumentError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
       const e = new cert.RangeArgumentError('foo')
       if (e.code !== 'ERR_INVALID_ARG_RANGE') {
-        throw Error('[] does not have the correct code')
+        throw Error('RangeArgumentError does not have the correct code')
       }
     })
     it('Contains the correct range', () => {
       const e = new cert.RangeArgumentError('foo', 42, 84, true, false)
       if (e.range !== '42 <= "foo" < 84') {
-        throw Error('[] does not have the correct valid')
+        throw Error('RangeArgumentError does not have the correct valid')
       }
     })
     it('Inherits the correct prototype', () => {
       const e = new cert.RangeArgumentError('foo')
       if (!(e instanceof RangeError)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error('RangeArgumentError does not inherit the correct prototype')
       }
     })
   })
   describe('ValueAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.ValueAssertionError('foo')
-      if (e.name !== 'Error') throw Error('[] does not have the correct name')
+      const e = new cert.ValueAssertionError()
+      if (e.name !== 'Error') {
+        throw Error('ValueAssertionError does not have the correct name')
+      }
     })
     it('Contains the correct message', () => {
-      const e = new cert.ValueAssertionError('foo')
+      const e = new cert.ValueAssertionError()
       if (e.message !== '[ERR_INVALID_VALUE]: Value is invalid') {
-        throw Error('[] does not have the correct message')
+        throw Error('ValueAssertionError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.ValueAssertionError('foo')
+      const e = new cert.ValueAssertionError()
       if (e.code !== 'ERR_INVALID_VALUE') {
-        throw Error('[] does not have the correct code')
+        throw Error('ValueAssertionError does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.ValueAssertionError('foo')
+      const e = new cert.ValueAssertionError()
       if (!(e instanceof Error)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error(
+          'ValueAssertionError does not inherit the correct prototype'
+        )
+      }
+    })
+    it('Supports custom messages', () => {
+      const e = new cert.ValueAssertionError('this is a custom message')
+      if (e.message !== '[ERR_INVALID_VALUE]: this is a custom message') {
+        throw Error('ValueAssertionError does not support custom messages')
       }
     })
   })
   describe('TypeAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.TypeAssertionError('foo')
+      const e = new cert.TypeAssertionError()
       if (e.name !== 'TypeError') {
-        throw Error('[] does not have the correct name')
+        throw Error('TypeAssertionError does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.TypeAssertionError('foo')
+      const e = new cert.TypeAssertionError()
       if (e.message !== '[ERR_INVALID_TYPE]: Value is of an invalid type') {
-        throw Error('[] does not have the correct message')
+        throw Error('TypeAssertionError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.TypeAssertionError('foo')
+      const e = new cert.TypeAssertionError()
       if (e.code !== 'ERR_INVALID_TYPE') {
-        throw Error('[] does not have the correct code')
+        throw Error('TypeAssertionError does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.TypeAssertionError('foo')
+      const e = new cert.TypeAssertionError()
       if (!(e instanceof TypeError)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error('TypeAssertionError does not inherit the correct prototype')
+      }
+    })
+    it('Supports custom messages', () => {
+      const e = new cert.TypeAssertionError('this is a custom message')
+      if (e.message !== '[ERR_INVALID_TYPE]: this is a custom message') {
+        throw Error('TypeAssertionError does not support custom messages')
       }
     })
   })
   describe('RangeAssertionError', () => {
     it('Contains the correct name', () => {
-      const e = new cert.RangeAssertionError('foo')
+      const e = new cert.RangeAssertionError()
       if (e.name !== 'RangeError') {
-        throw Error('[] does not have the correct name')
+        throw Error('RangeAssertionError does not have the correct name')
       }
     })
     it('Contains the correct message', () => {
-      const e = new cert.RangeAssertionError('foo')
+      const e = new cert.RangeAssertionError()
       if (e.message !== '[ERR_INVALID_RANGE]: Value is of a prohibited range') {
-        throw Error('[] does not have the correct message')
+        throw Error('RangeAssertionError does not have the correct message')
       }
     })
     it('Contains the correct code', () => {
-      const e = new cert.RangeAssertionError('foo')
+      const e = new cert.RangeAssertionError()
       if (e.code !== 'ERR_INVALID_RANGE') {
-        throw Error('[] does not have the correct code')
+        throw Error('RangeAssertionError does not have the correct code')
       }
     })
     it('Inherits the correct prototype', () => {
-      const e = new cert.RangeAssertionError('foo')
+      const e = new cert.RangeAssertionError()
       if (!(e instanceof RangeError)) {
-        throw Error('[] does not inherit the correct prototype')
+        throw Error(
+          'RangeAssertionError does not inherit the correct prototype'
+        )
+      }
+    })
+    it('Supports custom messages', () => {
+      const e = new cert.RangeAssertionError('this is a custom message')
+      if (e.message !== '[ERR_INVALID_RANGE]: this is a custom message') {
+        throw Error('RangeAssertionError does not support custom messages')
       }
     })
   })
@@ -1783,5 +1809,41 @@ describe('Instance Return Checking', () => {
     it('Returns instance for cert.check().isLTE', () => {
       cert(instance).is(instance.isLTE(0))
     })
+  })
+})
+
+describe('Custom Message Loading', () => {
+  it('Should throw loaded custom messages when value checking', () => {
+    try {
+      cert(123)
+        .message('this is a custom message')
+        .is('not 123')
+    } catch (e) {
+      if (e.message !== '[ERR_INVALID_VALUE]: this is a custom message') {
+        throw Error('Cert could not throw a custom message when value checking')
+      }
+    }
+  })
+  it('Should throw loaded custom messages when type checking', () => {
+    try {
+      cert(123)
+        .message('this is a custom message')
+        .isType('number')
+    } catch (e) {
+      if (e.message !== '[ERR_INVALID_TYPE]: this is a custom message') {
+        throw Error('Cert could not throw a custom message when value checking')
+      }
+    }
+  })
+  it('Should throw loaded custom messages when range checking', () => {
+    try {
+      cert(123)
+        .message('this is a custom message')
+        .isLT(23)
+    } catch (e) {
+      if (e.message !== '[ERR_INVALID_RANGE]: this is a custom message') {
+        throw Error('Cert could not throw a custom message when value checking')
+      }
+    }
   })
 })

@@ -1,6 +1,6 @@
 {
   "name": "cert-is",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.",
   "engines": {
     "node": ">=6.0.0"

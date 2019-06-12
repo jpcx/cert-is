@@ -221,9 +221,8 @@ Object.defineProperty(module, 'exports', {
      * e.code    // 'ERR_INVALID_VALUE'
      */
     class ValueAssertionError extends Error {
-      constructor () {
+      constructor (message = 'Value is invalid') {
         const code = 'ERR_INVALID_VALUE'
-        const message = 'Value is invalid'
         super(`[${code}]: ${message}`)
         this.code = code
       }
@@ -246,9 +245,8 @@ Object.defineProperty(module, 'exports', {
      * e.code    // 'ERR_INVALID_TYPE'
      */
     class TypeAssertionError extends TypeError {
-      constructor () {
+      constructor (message = 'Value is of an invalid type') {
         const code = 'ERR_INVALID_TYPE'
-        const message = 'Value is of an invalid type'
         super(`[${code}]: ${message}`)
         this.code = code
       }
@@ -271,46 +269,45 @@ Object.defineProperty(module, 'exports', {
      * e.code    // 'ERR_INVALID_RANGE'
      */
     class RangeAssertionError extends RangeError {
-      constructor () {
+      constructor (message = 'Value is of a prohibited range') {
         const code = 'ERR_INVALID_RANGE'
-        const message = 'Value is of a prohibited range'
         super(`[${code}]: ${message}`)
         this.code = code
       }
     }
 
     /**
-     * Checks all elements of `values` for inclusion or exclusion in the `valid` and `invalid` value sets.
+     * Checks all elements of `__.values` for inclusion or exclusion in the `valid` and `invalid` value sets.
      *
      * @private
      * @func   checkValues
-     * @param  {*}            values  - Values to check for strict equality.
+     * @param  {PrivateEnv}   __      - Certifier private storage.
      * @param  {(Array|null)} valid   - Array of valid values to reference.
      * @param  {(Array|null)} invalid - Array of invalid values to reference.
      * @throws {ValueAssertionError} Throws an ValueAssertionError if none of the values strictly equal any of the allowed values, or if any of the values strictly equals a prohibited value.
      */
-    const checkValues = (values, valid, invalid) => {
-      for (let value of values) {
+    const checkValues = (__, valid, invalid) => {
+      for (let value of __.values) {
         if (
           (valid !== null && !valid.includes(value)) ||
           (invalid !== null && invalid.includes(value))
         ) {
-          throw new ValueAssertionError()
+          throw new ValueAssertionError(__.messageBody)
         }
       }
     }
 
     /**
-     * Checks the types of all elements of `values` for strict inclusion or exclusion in the `valid` and `invalid` type sets. Uses typeof if a valid / invalid type is a string; uses instanceof if the type is a function.
+     * Checks the types of all elements of `__.values` for strict inclusion or exclusion in the `valid` and `invalid` type sets. Uses typeof if a valid / invalid type is a string; uses instanceof if the type is a function.
      *
      * @private
      * @func   checkTypes
-     * @param  {*}            values       - Values to check for strict equality.
+     * @param  {PrivateEnv}   __           - Certifier private storage.
      * @param  {(Array|null)} validTypes   - Array of valid types to reference.
      * @param  {(Array|null)} invalidTypes - Array of invalid types to reference.
      * @throws {(TypeAssertionError|TypeArgumentError)} Throws an TypeAssertionError if a value is  in `invalidTypes` or is not in `validTypes`. Throws an TypeArgumentError if an element in the type sets is neither a string nor a function.
      */
-    const checkTypes = (values, validTypes, invalidTypes) => {
+    const checkTypes = (__, validTypes, invalidTypes) => {
       const typeTypes = ['string', 'function', Function]
       const checkType = (value, type) => {
         if (typeof type === 'function' || type instanceof Function) {
@@ -334,13 +331,13 @@ Object.defineProperty(module, 'exports', {
             }
           }
         }
-        throw new TypeAssertionError()
+        throw new TypeAssertionError(__.messageBody)
       }
       const certInvalid = value => {
         for (let i = 0; i < invalidTypes.length; i++) {
           try {
             if (checkType(value, invalidTypes[i])) {
-              throw new TypeAssertionError()
+              throw new TypeAssertionError(__.messageBody)
             }
           } catch (err) {
             if (err.message === 'ERR_INVALID_ARG_TYPE') {
@@ -352,30 +349,30 @@ Object.defineProperty(module, 'exports', {
         }
       }
       if (validTypes !== null) {
-        for (let value of values) {
+        for (let value of __.values) {
           certValid(value)
         }
       }
       if (invalidTypes !== null) {
-        for (let value of values) {
+        for (let value of __.values) {
           certInvalid(value)
         }
       }
     }
 
     /**
-     * Checks all elements of `values` and their numerical relation to the provided bounds.
+     * Checks all elements of `__.values` and their numerical relation to the provided bounds.
      *
      * @private
      * @func   checkRanges
-     * @param  {number}  values  - Numbers to check for range adherence.
-     * @param  {number}  lower   - Lower bound to use for reference.
-     * @param  {number}  upper   - Upper bound to use for reference.
-     * @param  {boolean} lowIncl - Whether or not the lower bound is inclusive.
-     * @param  {booelan} upIncl  - Whether or not the upper bound is inclusive
+     * @param  {PrivateEnv} __      - Certifier private storage.
+     * @param  {number}     lower   - Lower bound to use for reference.
+     * @param  {number}     upper   - Upper bound to use for reference.
+     * @param  {boolean}    lowIncl - Whether or not the lower bound is inclusive.
+     * @param  {booelan}    upIncl  - Whether or not the upper bound is inclusive
      * @throws {(RangeAssertionError|TypeArgumentError)} - Throws an RangeAssertionError if an element of `values` is outside of the given bound.
      */
-    const checkRanges = (values, lower, upper, lowIncl, upIncl) => {
+    const checkRanges = (__, lower, upper, lowIncl, upIncl) => {
       if (typeof lower !== 'number') {
         throw new TypeArgumentError('lower', 'number')
       }
@@ -394,8 +391,8 @@ Object.defineProperty(module, 'exports', {
       if (upper === lower && !(lowIncl && upIncl)) {
         throw new RangeArgumentError('upper', lower, Infinity, false, true)
       }
-      for (let valIndex = 0; valIndex < values.length; valIndex++) {
-        const value = values[valIndex]
+      for (let valIndex = 0; valIndex < __.values.length; valIndex++) {
+        const value = __.values[valIndex]
         if (typeof value !== 'number') {
           throw new TypeArgumentError(`values[${valIndex}]`, 'number')
         }
@@ -405,7 +402,7 @@ Object.defineProperty(module, 'exports', {
           (value === lower && !lowIncl) ||
           (value === upper && !upIncl)
         ) {
-          throw new RangeAssertionError()
+          throw new RangeAssertionError(__.messageBody)
         }
       }
     }
@@ -416,10 +413,33 @@ Object.defineProperty(module, 'exports', {
      * @public
      * @class
      * @name   Certifier
-     * @param  {...*}     values - Values to certify.
+     * @param  {...*}    values - Values to certify.
      */
     class Certifier {
       constructor (...values) {
+        /**
+         * Certifier private storage.
+         *
+         * @private
+         * @typedef  {Object}   PrivateEnv
+         * @property {Array<*>} values        - Values to certify.
+         * @property {string}   [messageBody] - Custom AssertionError message body.
+         */
+        const __ = { values }
+
+        /**
+         * Loads a message into the certifier to provide additional context for
+         * thrown AssertionErrors.
+         *
+         * @public
+         * @param {string} message - Message to load.
+         * @returns {Certifier}
+         */
+        this.message = function (message) {
+          __.messageBody = message
+          return this
+        }
+
         /**
          * Certifies that ALL elements of `values` are strictly equal to any element of `allowed`. Throws if ANY element of `values` is NOT strictly equal to any valid value
          *
@@ -429,9 +449,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.is = function (...valid) {
-          checkValues(values, valid, null)
+          checkValues(__, valid, null)
           return this
         }
+
         /**
          * Certifies that All elements of `values` are not strictly equal to any element of `invalid`. Throws if the ANY element of `values` IS strictly equal to any invalid value.
          *
@@ -441,9 +462,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isNot = function (...invalid) {
-          checkValues(values, null, invalid)
+          checkValues(__, null, invalid)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` match any type in `validTypes`. Throws if the type of any element of `values` is NOT strictly equal to any valid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
          *
@@ -453,9 +475,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isType = function (...validTypes) {
-          checkTypes(values, validTypes, null)
+          checkTypes(__, validTypes, null)
           return this
         }
+
         /**
          * Certified that All elements of `values` DO NOT match any type in `invalidTypes`. Throws if the type of any element of `values` IS strictly equal to any invalid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
          *
@@ -465,9 +488,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isNotType = function (...invalidTypes) {
-          checkTypes(values, null, invalidTypes)
+          checkTypes(__, null, invalidTypes)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` are within the provided range. Either bound may be inclusive or exclusive. Defaults to exclusive for both.
          *
@@ -480,9 +504,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isRange = function (lower, upper, lowIncl = false, upIncl = false) {
-          checkRanges(values, lower, upper, lowIncl, upIncl)
+          checkRanges(__, lower, upper, lowIncl, upIncl)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` are greater than a provided lower bound. Throws if any element of `values` is NOT greater than the provided bound. Throws if any element of `values` is not a strict number type, or if `lower` is not a strict number type.
          *
@@ -492,9 +517,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isGT = function (lower) {
-          checkRanges(values, lower, Infinity, false, true)
+          checkRanges(__, lower, Infinity, false, true)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` are greater than or equal to a provided lower bound. Throws if any element of `values` is NOT greater or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `lower` is not a strict number type.
          *
@@ -504,9 +530,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isGTE = function (lower) {
-          checkRanges(values, lower, Infinity, true, true)
+          checkRanges(__, lower, Infinity, true, true)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` are less than a provided upper bound. Throws if any element of `values` is NOT less than the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
          *
@@ -516,9 +543,10 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isLT = function (upper) {
-          checkRanges(values, -Infinity, upper, true, false)
+          checkRanges(__, -Infinity, upper, true, false)
           return this
         }
+
         /**
          * Certifies that ALL elements of `values` are less than or equal to a provided upper bound. Throws if any element of `values` is NOT less than or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
          *
@@ -528,7 +556,7 @@ Object.defineProperty(module, 'exports', {
          * @returns {Certifier} Returns instance for re-use.
          */
         this.isLTE = function (upper) {
-          checkRanges(values, -Infinity, upper, true, true)
+          checkRanges(__, -Infinity, upper, true, true)
           return this
         }
       }
@@ -548,6 +576,12 @@ Object.defineProperty(module, 'exports', {
     class Checker extends Certifier {
       constructor (...values) {
         super(...values)
+        const fnExclusions = ['message']
+        for (let excl of fnExclusions) {
+          this[excl] = function () {
+            return this
+          }
+        }
         for (let fnName of Object.keys(this)) {
           const fn = this[fnName].bind(this)
           this[fnName] = (...args) => {
@@ -583,12 +617,6 @@ Object.defineProperty(module, 'exports', {
      */
     const check = (...values) => new Checker(...values)
 
-    /**
-     * Function exported as the module.
-     *
-     * @private
-     * @borrows module:cert-is as cert
-     */
     const cert = (...values) => new Certifier(...values)
 
     cert.check = check
