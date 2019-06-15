@@ -134,7 +134,7 @@ cert.check(42).message('42 is not not 42').isNot(42) // returns false
 
 ### cert-is
 
-[index.js:66-654](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L66-L654 "Source code on GitHub")
+[index.js:66-654](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L66-L654 "Source code on GitHub")
 
 -   **See: [GitHub](http://github.com/jpcx/cert-is)**
 
@@ -219,7 +219,7 @@ Returns **[Certifier](#certifier)** Instance of the [Certifier](#certifier) clas
 
 ### Type
 
-[index.js:104-77](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L68-L77 "Source code on GitHub")
+[index.js:68-77](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L68-L77 "Source code on GitHub")
 
 Any value that could potentially refer to a type or constructor.
 
@@ -237,7 +237,7 @@ Array
 
 ### ValueArgumentError
 
-[index.js:104-114](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L104-L114 "Source code on GitHub")
+[index.js:104-114](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L104-L114 "Source code on GitHub")
 
 **Extends Error**
 
@@ -274,7 +274,7 @@ e.valid   // ['bar']
 
 ### TypeArgumentError
 
-[index.js:141-151](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L141-L151 "Source code on GitHub")
+[index.js:141-151](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L141-L151 "Source code on GitHub")
 
 **Extends TypeError**
 
@@ -311,7 +311,7 @@ e.validTypes // ['string', 'number']
 
 ### RangeArgumentError
 
-[index.js:186-205](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L186-L205 "Source code on GitHub")
+[index.js:186-205](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L186-L205 "Source code on GitHub")
 
 **Extends RangeError**
 
@@ -358,7 +358,7 @@ e.range   // `42 <= 'foo' < 84`
 
 ### ValueAssertionError
 
-[index.js:230-236](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L230-L236 "Source code on GitHub")
+[index.js:230-236](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L230-L236 "Source code on GitHub")
 
 **Extends Error**
 
@@ -392,7 +392,7 @@ e.code    // 'ERR_INVALID_VALUE'
 
 ### TypeAssertionError
 
-[index.js:261-267](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L261-L267 "Source code on GitHub")
+[index.js:261-267](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L261-L267 "Source code on GitHub")
 
 **Extends TypeError**
 
@@ -426,7 +426,7 @@ e.code    // 'ERR_INVALID_TYPE'
 
 ### RangeAssertionError
 
-[index.js:292-298](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L292-L298 "Source code on GitHub")
+[index.js:292-298](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L292-L298 "Source code on GitHub")
 
 **Extends RangeError**
 
@@ -460,7 +460,7 @@ e.code    // 'ERR_INVALID_RANGE'
 
 ### Certifier
 
-[index.js:439-584](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L439-L584 "Source code on GitHub")
+[index.js:439-584](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L439-L584 "Source code on GitHub")
 
 Given a set of values, provides a collection of assertion tools for checking strict equality, type, and range. Throws the appropriate error if a given test does not pass.
 
@@ -470,7 +470,7 @@ Given a set of values, provides a collection of assertion tools for checking str
 
 #### is
 
-[index.js:472-475](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L472-L475 "Source code on GitHub")
+[index.js:472-475](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L472-L475 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are strictly equal to any element of `allowed`. Throws if ANY element of `values` is NOT strictly equal to any valid value
 
@@ -485,7 +485,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isNot
 
-[index.js:485-488](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L485-L488 "Source code on GitHub")
+[index.js:485-488](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L485-L488 "Source code on GitHub")
 
 Certifies that All elements of `values` are not strictly equal to any element of `invalid`. Throws if the ANY element of `values` IS strictly equal to any invalid value.
 
@@ -500,7 +500,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isType
 
-[index.js:498-501](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L498-L501 "Source code on GitHub")
+[index.js:498-501](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L498-L501 "Source code on GitHub")
 
 Certifies that ALL elements of `values` match any type in `validTypes`. Throws if the type of any element of `values` is NOT strictly equal to any valid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
 
@@ -515,7 +515,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isNotType
 
-[index.js:511-514](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L511-L514 "Source code on GitHub")
+[index.js:511-514](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L511-L514 "Source code on GitHub")
 
 Certified that All elements of `values` DO NOT match any type in `invalidTypes`. Throws if the type of any element of `values` IS strictly equal to any invalid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
 
@@ -530,7 +530,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isRange
 
-[index.js:527-530](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L527-L530 "Source code on GitHub")
+[index.js:527-530](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L527-L530 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are within the provided range. Either bound may be inclusive or exclusive. Defaults to exclusive for both.
 
@@ -548,7 +548,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isGT
 
-[index.js:540-543](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L540-L543 "Source code on GitHub")
+[index.js:540-543](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L540-L543 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are greater than a provided lower bound. Throws if any element of `values` is NOT greater than the provided bound. Throws if any element of `values` is not a strict number type, or if `lower` is not a strict number type.
 
@@ -563,7 +563,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isGTE
 
-[index.js:553-556](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L553-L556 "Source code on GitHub")
+[index.js:553-556](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L553-L556 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are greater than or equal to a provided lower bound. Throws if any element of `values` is NOT greater or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `lower` is not a strict number type.
 
@@ -578,7 +578,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isLT
 
-[index.js:566-569](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L566-L569 "Source code on GitHub")
+[index.js:566-569](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L566-L569 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are less than a provided upper bound. Throws if any element of `values` is NOT less than the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
 
@@ -593,7 +593,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 #### isLTE
 
-[index.js:579-582](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L579-L582 "Source code on GitHub")
+[index.js:579-582](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L579-L582 "Source code on GitHub")
 
 Certifies that ALL elements of `values` are less than or equal to a provided upper bound. Throws if any element of `values` is NOT less than or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
 
@@ -608,7 +608,7 @@ Returns **[Certifier](#certifier)** Returns instance for re-use.
 
 ### 
 
-[index.js:449](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L449 "Source code on GitHub")
+[index.js:449](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L449 "Source code on GitHub")
 
 Loads a message into the certifier to provide additional context for
 thrown AssertionErrors.
@@ -621,7 +621,7 @@ Returns **[Certifier](#certifier)**
 
 ### Checker
 
-[index.js:597-624](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L597-L624 "Source code on GitHub")
+[index.js:597-624](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L597-L624 "Source code on GitHub")
 
 **Extends Certifier**
 
@@ -638,7 +638,7 @@ Returns **([Checker](#checker) \| `false`)** Returns the instance for re-use (tr
 
 ### check
 
-[index.js:639](https://github.com/jpcx/cert-is/blob/0.3.1/index.js#L639 "Source code on GitHub")
+[index.js:639](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L639 "Source code on GitHub")
 
 Constructs a new Checker instance in order to perform tests without throwing test errors.
 

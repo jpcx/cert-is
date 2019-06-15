@@ -1,5 +1,18 @@
 # Changelog
 
+## <a name="0.3.2"></a> [0.3.2](https://github.com/jpcx/cert-is/tree/0.3.2) (2019-06-14)
+
+| __[Changes since 0.3.1](https://github.com/jpcx/cert-is/compare/0.3.1...0.3.2)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.3.2) | [README](https://github.com/jpcx/cert-is/tree/0.3.2/README.md) |
+| --- | --- | --- |
+
+| [Source Code (zip)](https://github.com/jpcx/cert-is/archive/0.3.2.zip) | [Source Code (tar.gz)](https://github.com/jpcx/cert-is/archive/0.3.2.tar.gz) |
+| --- | --- |
+
+__Bugfixes:__
+
++ __NPM:__  Removed deep-props package-lock modification script- using npm-force-resolutions only to test GitHub vulnerability scan.
++ __docs:__ Fixed documentationjs fix script.
+
 ## <a name="0.3.1"></a> [0.3.1](https://github.com/jpcx/cert-is/tree/0.3.1) (2019-06-14)
 
 | __[Changes since 0.3.0](https://github.com/jpcx/cert-is/compare/0.3.0...0.3.1)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.3.1) | [README](https://github.com/jpcx/cert-is/tree/0.3.1/README.md) |
