@@ -1,5 +1,19 @@
 # Changelog
 
+## <a name="0.3.1"></a> [0.3.1](https://github.com/jpcx/cert-is/tree/0.3.1) (2019-06-14)
+
+| __[Changes since 0.3.0](https://github.com/jpcx/cert-is/compare/0.3.0...0.3.1)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.3.1) | [README](https://github.com/jpcx/cert-is/tree/0.3.1/README.md) |
+| --- | --- | --- |
+
+| [Source Code (zip)](https://github.com/jpcx/cert-is/archive/0.3.1.zip) | [Source Code (tar.gz)](https://github.com/jpcx/cert-is/archive/0.3.1.tar.gz) |
+| --- | --- |
+
+__Bugfixes:__
+
++ __NPM:__  Fixed vulnerability in 'diff' nested dependency by adding npm-force-resolutions and custom force-resolutions script.
+            Cleaned up scripts section.
++ __docs:__ Added hash->tag to scripts/fixREADME.js
+
 ## <a name="0.3.0"></a> [0.3.0](https://github.com/jpcx/cert-is/tree/0.3.0) (2019-06-11)
 
 | __[Changes since 0.2.1](https://github.com/jpcx/cert-is/compare/0.2.1...0.3.0)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.3.0) | [README](https://github.com/jpcx/cert-is/tree/0.3.0/README.md) |

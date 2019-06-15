@@ -1,5 +1,5 @@
 /**
- * Formats documentation.js generated Table of Contents for brevity. Fixes source code links.
+ * Formats documentation.js generated Table of Contents for brevity. Fixes source code links and commit-dependent hash links.
  *
  * @private
  * @author  Justin Collier <jpcxist@gmail.com>
@@ -10,6 +10,7 @@
 const fs = require('fs')
 const path = require('path')
 
+const pkgVer = require('../package.json').version
 const README_PATH = path.join(__dirname, '../README.md')
 
 const README = fs.readFileSync(README_PATH, 'utf8').split('\n')
@@ -17,6 +18,7 @@ const README = fs.readFileSync(README_PATH, 'utf8').split('\n')
 let section = ''
 for (let i = 0; i < README.length; i++) {
   const ln = README[i]
+
   if (ln.match(/^#+/m)) {
     // Set the section identifier (heading)
     section = ln.match(/#+ (.*)/m)[1]
@@ -37,10 +39,7 @@ for (let i = 0; i < README.length; i++) {
       // Line is a source code link
       if (sourceCodeMatch[1] !== sourceCodeMatch[3]) {
         // Invalid source code link; match with github
-        README[i] = ln.replace(
-          /^(\[.*?.js:)(\d+)/m,
-          `$1${sourceCodeMatch[3]}`
-        )
+        README[i] = ln.replace(/^(\[.*?.js:)(\d+)/m, `$1${sourceCodeMatch[3]}`)
       }
       if (sourceCodeMatch[2] !== sourceCodeMatch[4]) {
         // Invalid source code link; match with github
@@ -56,6 +55,11 @@ for (let i = 0; i < README.length; i++) {
           '$1$2$4$5'
         )
       }
+      // fix blob/hash/ -> blob/tag/
+      README[i] = README[i].replace(
+        /\/blob\/[0-9a-z]+?\//g,
+        '/blob/' + pkgVer + '/'
+      )
     }
   }
 }
