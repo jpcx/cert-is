@@ -1,6 +1,6 @@
 {
   "name": "cert-is",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.",
   "engines": {
     "node": ">=6.0.0"
@@ -8,11 +8,11 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "update": "rm -rf node_modules && rm package-lock.json && ncu -u && npm i -d && node scripts/superForceResolutions.js",
+    "update": "rm -rf node_modules && rm package-lock.json && ncu -u && npm i -d && npx npm-force-resolutions && rm -rf node_modules && npm i -d",
     "prepack": "npm run-script update && npm run-script write-public-api-docs && npm test",
     "serve-public-docs": "documentation serve --watch index.js -a public",
     "serve-private-docs": "documentation serve --watch index.js -a public private protected undefined",
-    "write-public-api-docs": "documentation readme index.js -s API -a public --github && node scripts/fixREADME.js"
+    "write-public-api-docs": "documentation readme index.js -s API -a public --github && node scripts/postDocJS.js"
   },
   "keywords": [
     "assert",
@@ -36,7 +36,6 @@
     "email": "jpcxist@gmail.com"
   },
   "devDependencies": {
-    "deep-props": "^0.3.3",
     "documentation": "^11.0.1",
     "mocha": "^6.1.4",
     "npm-force-resolutions": "0.0.2",
