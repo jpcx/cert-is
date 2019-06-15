@@ -1,6 +1,6 @@
 # Changelog
 
-## <a name="0.3.2"></a> [0.3.2](https://github.com/jpcx/cert-is/tree/0.3.2) (2019-06-14)
+## <a name="0.3.2"></a> [0.3.2](https://github.com/jpcx/cert-is/tree/0.3.2) (2019-06-15)
 
 | __[Changes since 0.3.1](https://github.com/jpcx/cert-is/compare/0.3.1...0.3.2)__ | [Release Notes](https://github.com/jpcx/cert-is/releases/tag/0.3.2) | [README](https://github.com/jpcx/cert-is/tree/0.3.2/README.md) |
 | --- | --- | --- |
