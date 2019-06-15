@@ -211,13 +211,20 @@ Object.defineProperty(module, 'exports', {
      * @class
      * @name ValueAssertionError
      * @extends Error
-     * @prop {'Error'} name - Name of the error constructor.
-     * @prop {'[ERR_INVALID_VALUE]: Value is invalid'}  message - Message describing the issue.
-     * @prop {'ERR_INVALID_VALUE'} code    - Error code.
+     * @param {string} message - Custom message to prepend with '
+     * [ERR_INVALID_VALUE]: '.
+     * @prop {'Error'} name    - Name of the error constructor.
+     * @prop {string}  message - Message describing the issue.
+     * @prop {'ERR_INVALID_VALUE'} code - Error code.
      * @example
      * const e = new ValueAssertionError()
      * e.name    // 'Error'
      * e.message // '[ERR_INVALID_VALUE]: Value is invalid'
+     * e.code    // 'ERR_INVALID_VALUE'
+     * @example
+     * const e = new ValueAssertionError('this is a custom message')
+     * e.name    // 'Error'
+     * e.message // '[ERR_INVALID_VALUE]: this is a custom message'
      * e.code    // 'ERR_INVALID_VALUE'
      */
     class ValueAssertionError extends Error {
@@ -235,13 +242,20 @@ Object.defineProperty(module, 'exports', {
      * @class
      * @name TypeAssertionError
      * @extends TypeError
-     * @prop {'TypeError'} name - Name of the error constructor.
-     * @prop {'[ERR_INVALID_TYPE]: Value is of an invalid type'} message - Message describing the issue.
-     * @prop {'ERR_INVALID_TYPE'} code - Error code.
+     * @param   {string}      message - Custom message to prepend with '
+     * [ERR_INVALID_TYPE]: '.
+     * @prop    {'TypeError'} name    - Name of the error constructor.
+     * @prop    {string}      message - Message describing the issue.
+     * @prop    {'ERR_INVALID_TYPE'} code - Error code.
      * @example
      * const e = new TypeAssertionError()
      * e.name    // 'TypeError'
      * e.message // '[ERR_INVALID_TYPE]: Value is of an invalid type'
+     * e.code    // 'ERR_INVALID_TYPE'
+     * @example
+     * const e = new TypeAssertionError('this is a custom message')
+     * e.name    // 'Error'
+     * e.message // '[ERR_INVALID_TYPE]: this is a custom message'
      * e.code    // 'ERR_INVALID_TYPE'
      */
     class TypeAssertionError extends TypeError {
@@ -259,13 +273,20 @@ Object.defineProperty(module, 'exports', {
      * @class
      * @name    RangeAssertionError
      * @extends RangeError
-     * @prop {'TypeError'} name - Name of the error constructor.
-     * @prop {'[ERR_INVALID_RANGE]: Value is of a prohibited range'} message - Message describing the issue.
-     * @prop {'ERR_INVALID_RANGE'} code - Error code.
+     * @param   {string}      message - Custom message to prepend with '
+     * [ERR_INVALID_RANGE]: '.
+     * @prop    {'TypeError'} name    - Name of the error constructor.
+     * @prop    {string}      message - Message describing the issue.
+     * @prop    {'ERR_INVALID_RANGE'} code - Error code.
      * @example
      * const e = new RangeAssertionError()
      * e.name    // 'RangeError'
      * e.message // '[ERR_INVALID_RANGE]: Value is of a prohibited range'
+     * e.code    // 'ERR_INVALID_RANGE'
+     * @example
+     * const e = new RangeAssertionError('this is a custom message')
+     * e.name    // 'Error'
+     * e.message // '[ERR_INVALID_RANGE]: this is a custom message'
      * e.code    // 'ERR_INVALID_RANGE'
      */
     class RangeAssertionError extends RangeError {
