@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [Certifier](cert_is.certifier.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [Certifier](cert_is.certifier.md)
 
 # Class: Certifier
 
@@ -40,7 +40,7 @@ test does not pass. All values must pass the supplied tests.
 
 \+ **new Certifier**(...`values`: any): *[Certifier](cert_is.certifier.md)*
 
-Defined in src/certifier.ts:148
+*Defined in [src/certifier.ts:148](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L148)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 
 • **is**: *function*
 
-Defined in src/certifier.ts:48
+*Defined in [src/certifier.ts:48](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L48)*
 
 Certifies that ALL elements of `values` are strictly equal to any element
 of `allowed`. Throws if ANY element of `values` is NOT strictly equal to
@@ -84,7 +84,7 @@ ___
 
 • **isGT**: *function*
 
-Defined in src/certifier.ts:106
+*Defined in [src/certifier.ts:106](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L106)*
 
 Certifies that ALL elements of `values` are greater than a provided lower
 bound. Throws if any element of `values` is NOT greater than the provided
@@ -115,7 +115,7 @@ ___
 
 • **isGTE**: *function*
 
-Defined in src/certifier.ts:120
+*Defined in [src/certifier.ts:120](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L120)*
 
 Certifies that ALL elements of `values` are greater than or equal to a
 provided lower bound. Throws if any element of `values` is NOT greater or
@@ -146,7 +146,7 @@ ___
 
 • **isLT**: *function*
 
-Defined in src/certifier.ts:134
+*Defined in [src/certifier.ts:134](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L134)*
 
 Certifies that ALL elements of `values` are less than a provided upper
 bound. Throws if any element of `values` is NOT less than the provided
@@ -177,7 +177,7 @@ ___
 
 • **isLTE**: *function*
 
-Defined in src/certifier.ts:148
+*Defined in [src/certifier.ts:148](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L148)*
 
 Certifies that ALL elements of `values` are less than or equal to a
 provided upper bound. Throws if any element of `values` is NOT less than
@@ -208,7 +208,7 @@ ___
 
 • **isNot**: *function*
 
-Defined in src/certifier.ts:59
+*Defined in [src/certifier.ts:59](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L59)*
 
 Certifies that All elements of `values` are not strictly equal to any
 element of `invalid`. Throws if the ANY element of `values` IS strictly
@@ -236,7 +236,7 @@ ___
 
 • **isNotType**: *function*
 
-Defined in src/certifier.ts:90
+*Defined in [src/certifier.ts:90](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L90)*
 
 Certified that All elements of `values` DO NOT match any type in
 `invalidTypes`. Throws if the type of any element of `values` IS strictly
@@ -268,7 +268,7 @@ ___
 
 • **isType**: *function*
 
-Defined in src/certifier.ts:73
+*Defined in [src/certifier.ts:73](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L73)*
 
 Certifies that ALL elements of `values` match any type in `validTypes`.
 Throws if the type of any element of `values` is NOT strictly equal to
@@ -299,7 +299,7 @@ ___
 
 • **message**: *function*
 
-Defined in src/certifier.ts:37
+*Defined in [src/certifier.ts:37](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L37)*
 
 Loads a message into the certifier to provide additional context for
 thrown AssertionErrors.
