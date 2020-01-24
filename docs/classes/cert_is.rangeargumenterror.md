@@ -1,4 +1,4 @@
-[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [RangeArgumentError](cert_is.rangeargumenterror.md)
+[cert-is - v1.0.2](../../README.md) › [Globals](../../README.md) › [cert-is](../../README.md) › [RangeArgumentError](cert_is.rangeargumenterror.md)
 
 # Class: RangeArgumentError
 
@@ -73,11 +73,11 @@ e.range   // `42 <= 'foo' < 84`
 
 ## Constructors
 
-###  constructor
+### constructor
 
 \+ **new RangeArgumentError**(`paramName`: string, `lower`: number, `upper`: number, `lowerIsInclusive`: boolean, `upperIsInclusive`: boolean): *[RangeArgumentError](cert_is.rangeargumenterror.md)*
 
-*Defined in [src/errors/rangeArgumentError.ts:49](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L49)*
+*Defined in [src/errors/rangeArgumentError.ts:49](src/errors/rangeArgumentError.ts#L49)*
 
 **Parameters:**
 
@@ -93,31 +93,27 @@ Name | Type |
 
 ## Properties
 
-###  code
+### code
 
 • **code**: *string*
 
-*Defined in [src/errors/rangeArgumentError.ts:48](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L48)*
+*Defined in [src/errors/rangeArgumentError.ts:48](src/errors/rangeArgumentError.ts#L48)*
 
 ___
 
-###  message
+### message
 
 • **message**: *string*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
-
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
 *Inherited from void*
-
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -125,7 +121,7 @@ ___
 
 • **range**? : *undefined | string*
 
-*Defined in [src/errors/rangeArgumentError.ts:49](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L49)*
+*Defined in [src/errors/rangeArgumentError.ts:49](src/errors/rangeArgumentError.ts#L49)*
 
 ___
 
@@ -137,12 +133,9 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
-
 ___
 
 ### `Static` RangeError
 
 ▪ **RangeError**: *RangeErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1006
