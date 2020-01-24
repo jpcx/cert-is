@@ -89,7 +89,7 @@ Please raise an issue if you find any. Pull requests are welcome!
 
 Ƭ **AnyConstructorFunction**: *object*
 
-*Defined in [src/certifier.ts:16](https://github.com/jpcx/cert-is/blob/09879b3/src/certifier.ts#L16)*
+*Defined in [src/certifier.ts:16](src/certifier.ts#L16)*
 
 Any function that uses new to construct an object.
 
@@ -101,7 +101,7 @@ Any function that uses new to construct an object.
 
 ▸ **cert**(...`values`: any): *[Certifier](docs/classes/cert_is.certifier.md)*
 
-*Defined in [src/index.ts:59](https://github.com/jpcx/cert-is/blob/09879b3/src/index.ts#L59)*
+*Defined in [src/index.ts:59](src/index.ts#L59)*
 
 Constructs a Certifier instance given a set of values. All values must pass
 the supplied tests.
@@ -154,7 +154,7 @@ ___
 
 ▸ **check**(...`values`: any): *[Checker](docs/classes/cert_is.checker.md)*
 
-*Defined in [src/index.ts:80](https://github.com/jpcx/cert-is/blob/09879b3/src/index.ts#L80)*
+*Defined in [src/index.ts:80](src/index.ts#L80)*
 
 Constructs a Checker instance given a set of values. All values must pass
 the supplied tests.

@@ -1,12 +1,20 @@
 2020-01-24  Justin Collier  <jpcxist@gmail.com>
 
-	* cert-is: Version 1.0.0 released.
-	Converted to TypeScript
-	Removed .isRange
-	Modified exports structure
+	* cert-is: Version 1.0.2 released.
+	* scripts/postProcessDocs.ts: Removed GitHub links
+	Added saving class markdown changes to disk
+	* ChangeLog: Reordered ChangeLog
 
 2020-01-24  Justin Collier  <jpcxist@gmail.com>
 
 	* cert-is: Version 1.0.1 released.
 	* scripts/postProcessDocs.ts: Loosened link-check regex
 	* ChangeLog: Created ChangeLog
+
+2020-01-24  Justin Collier  <jpcxist@gmail.com>
+
+	* cert-is: Version 1.0.0 released.
+	Converted to TypeScript
+	Removed .isRange
+	Modified exports structure
+

@@ -1,6 +1,6 @@
 {
-  "name": "cert-is",
-	"version": "1.0.1",
+	"name": "cert-is",
+	"version": "1.0.2",
 	"description": "Provides a collection of runtime assertion tools for checking strict equality, type, and range of a set of values.",
 	"license": "MIT",
 	"repository": "github:jpcx/cert-is",
@@ -52,6 +52,6 @@
 		"typescript": "3.*.*"
 	},
 	"engines": {
-    "node" : ">=6.0.0"
-  }
+		"node" : ">=6.0.0"
+	}
 }

@@ -45,6 +45,8 @@ const kDocsPath = path.join(kProjectSource, 'docs');
 const kDocsReadmePath = path.join(kDocsPath, 'README.md');
 const kDocsGlobalsPath = path.join(kDocsPath, 'globals.md');
 const kMainReadmePath = path.join(kProjectSource, 'README.md');
+const kGithubCommitLinkRegex = /https:\/\/github\.com\/jpcx\/cert-is\/blob\/.+?\//g;
+const kNodeModuleDefinitionRegex = /Defined in node_modules.*?\n\n?/g;
 // group 1: name of global link
 const kDocGlobalLinkRegex = /\[([^[]+?)\]\(((?:\.\.\/)+)globals\.md/g;
 // group 1: name of readme link
@@ -125,6 +127,8 @@ const fixDocLinks = (content: string) => {
     kDocPostLinkFxRegex,
     '[' + kModuleName + ']($1../README.md)'
   );
+  buf = buf.replace(kGithubCommitLinkRegex, '');
+  buf = buf.replace(kNodeModuleDefinitionRegex, '');
   return buf;
 };
 
@@ -160,7 +164,8 @@ const fixModuleDocLinks = (text: string) =>
       const newLink = link.replace(kModuleFileName, 'README.md');
       return match.replace(link, newLink);
     }
-    throw Error('Failed to match sub-pattern in fixModuleDocLinks');
+    // return match if no modifications needed
+    return match;
   });
 
 const findDocPathByName = (
@@ -243,6 +248,9 @@ const pipe = (data: any) => {
 
   const insertionResult = insertReadmeCopyData(mainReadmeFile, readmeCopyData);
   await fs.promises.writeFile(kMainReadmePath, insertionResult, 'utf8');
+  for (const [path, data] of Object.entries(docFiles)) {
+    await fs.promises.writeFile(path, data, 'utf8');
+  }
 
   await deleteFile(path.dirname(moduleDocPath));
 

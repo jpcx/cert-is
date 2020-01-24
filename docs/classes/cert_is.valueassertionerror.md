@@ -1,4 +1,4 @@
-[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [ValueAssertionError](cert_is.valueassertionerror.md)
+[cert-is - v1.0.2](../../README.md) › [Globals](../../README.md) › [cert-is](../../README.md) › [ValueAssertionError](cert_is.valueassertionerror.md)
 
 # Class: ValueAssertionError
 
@@ -53,11 +53,11 @@ e.code    // 'ERR_INVALID_VALUE'
 
 ## Constructors
 
-###  constructor
+### constructor
 
 \+ **new ValueAssertionError**(`message`: string): *[ValueAssertionError](cert_is.valueassertionerror.md)*
 
-*Defined in [src/errors/valueAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueAssertionError.ts#L35)*
+*Defined in [src/errors/valueAssertionError.ts:35](src/errors/valueAssertionError.ts#L35)*
 
 **Parameters:**
 
@@ -69,31 +69,27 @@ Name | Type | Default |
 
 ## Properties
 
-###  code
+### code
 
 • **code**: *string*
 
-*Defined in [src/errors/valueAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueAssertionError.ts#L35)*
+*Defined in [src/errors/valueAssertionError.ts:35](src/errors/valueAssertionError.ts#L35)*
 
 ___
 
-###  message
+### message
 
 • **message**: *string*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
-
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
 *Inherited from void*
-
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -105,12 +101,9 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
-
 ___
 
 ### `Static` Error
 
 ▪ **Error**: *ErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:984
