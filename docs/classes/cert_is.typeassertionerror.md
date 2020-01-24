@@ -1,4 +1,4 @@
-[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [TypeAssertionError](cert_is.typeassertionerror.md)
+[cert-is - v1.0.2](../../README.md) › [Globals](../../README.md) › [cert-is](../../README.md) › [TypeAssertionError](cert_is.typeassertionerror.md)
 
 # Class: TypeAssertionError
 
@@ -53,11 +53,11 @@ e.code    // 'ERR_INVALID_TYPE'
 
 ## Constructors
 
-###  constructor
+### constructor
 
 \+ **new TypeAssertionError**(`message`: string): *[TypeAssertionError](cert_is.typeassertionerror.md)*
 
-*Defined in [src/errors/typeAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeAssertionError.ts#L35)*
+*Defined in [src/errors/typeAssertionError.ts:35](src/errors/typeAssertionError.ts#L35)*
 
 **Parameters:**
 
@@ -69,31 +69,27 @@ Name | Type | Default |
 
 ## Properties
 
-###  code
+### code
 
 • **code**: *string*
 
-*Defined in [src/errors/typeAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeAssertionError.ts#L35)*
+*Defined in [src/errors/typeAssertionError.ts:35](src/errors/typeAssertionError.ts#L35)*
 
 ___
 
-###  message
+### message
 
 • **message**: *string*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
-
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
 *Inherited from void*
-
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -105,12 +101,9 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
-
 ___
 
 ### `Static` TypeError
 
 ▪ **TypeError**: *TypeErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1039

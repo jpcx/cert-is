@@ -1,4 +1,4 @@
-[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [TypeArgumentError](cert_is.typeargumenterror.md)
+[cert-is - v1.0.2](../../README.md) › [Globals](../../README.md) › [cert-is](../../README.md) › [TypeArgumentError](cert_is.typeargumenterror.md)
 
 # Class: TypeArgumentError
 
@@ -60,48 +60,44 @@ e.validTypes // ['string', 'number']
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new TypeArgumentError**(`paramName`: string, ...`validTypes`: Array‹string | [AnyConstructorFunction](../modules/cert_is.md#anyconstructorfunction)›): *[TypeArgumentError](cert_is.typeargumenterror.md)*
+\+ **new TypeArgumentError**(`paramName`: string, ...`validTypes`: Array‹string | [AnyConstructorFunction](../../README.md#anyconstructorfunction)›): *[TypeArgumentError](cert_is.typeargumenterror.md)*
 
-*Defined in [src/errors/typeArgumentError.ts:42](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L42)*
+*Defined in [src/errors/typeArgumentError.ts:42](src/errors/typeArgumentError.ts#L42)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `paramName` | string |
-`...validTypes` | Array‹string &#124; [AnyConstructorFunction](../modules/cert_is.md#anyconstructorfunction)› |
+`...validTypes` | Array‹string &#124; [AnyConstructorFunction](../../README.md#anyconstructorfunction)› |
 
 **Returns:** *[TypeArgumentError](cert_is.typeargumenterror.md)*
 
 ## Properties
 
-###  code
+### code
 
 • **code**: *string*
 
-*Defined in [src/errors/typeArgumentError.ts:41](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L41)*
+*Defined in [src/errors/typeArgumentError.ts:41](src/errors/typeArgumentError.ts#L41)*
 
 ___
 
-###  message
+### message
 
 • **message**: *string*
 
 *Inherited from void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:974
-
 ___
 
-###  name
+### name
 
 • **name**: *string*
 
 *Inherited from void*
-
-Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
 ___
 
@@ -113,15 +109,13 @@ ___
 
 *Overrides void*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:975
-
 ___
 
 ### `Optional` validTypes
 
-• **validTypes**? : *Array‹string | [AnyConstructorFunction](../modules/cert_is.md#anyconstructorfunction)›*
+• **validTypes**? : *Array‹string | [AnyConstructorFunction](../../README.md#anyconstructorfunction)›*
 
-*Defined in [src/errors/typeArgumentError.ts:42](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L42)*
+*Defined in [src/errors/typeArgumentError.ts:42](src/errors/typeArgumentError.ts#L42)*
 
 ___
 
@@ -129,4 +123,3 @@ ___
 
 ▪ **TypeError**: *TypeErrorConstructor*
 
-Defined in node_modules/typescript/lib/lib.es5.d.ts:1039
