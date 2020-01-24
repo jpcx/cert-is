@@ -1,48 +1,57 @@
 {
   "name": "cert-is",
-  "version": "0.3.2",
-  "description": "Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.",
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha",
-    "update": "rm -rf node_modules && rm package-lock.json && ncu -u && npm i -d && npx npm-force-resolutions && rm -rf node_modules && npm i -d",
-    "prepack": "npm run-script update && npm run-script write-public-api-docs && npm test",
-    "serve-public-docs": "documentation serve --watch index.js -a public",
-    "serve-private-docs": "documentation serve --watch index.js -a public private protected undefined",
-    "write-public-api-docs": "documentation readme index.js -s API -a public --github && node scripts/postDocJS.js"
-  },
-  "keywords": [
-    "assert",
-    "assertion",
-    "certify",
-    "value",
-    "variable",
-    "parameter",
-    "type",
-    "check",
-    "typecheck",
-    "range",
-    "between",
-    "error"
-  ],
-  "author": "Justin Collier",
-  "license": "MIT",
-  "repository": "github:jpcx/cert-is",
-  "bugs": {
-    "url": "https://github.com/jpcx/cert-is/issues",
-    "email": "jpcxist@gmail.com"
-  },
-  "devDependencies": {
-    "documentation": "^11.0.1",
-    "mocha": "^6.1.4",
-    "npm-force-resolutions": "0.0.2",
-    "standard": "^12.0.1"
-  },
-  "resolutions": {
-    "js-yaml": "^3.13.1",
-    "diff": "^3.5.0"
+	"version": "1.0.0",
+	"description": "Provides a collection of runtime assertion tools for checking strict equality, type, and range of a set of values.",
+	"license": "MIT",
+	"repository": "github:jpcx/cert-is",
+	"author": {
+		"name": "Justin Collier",
+		"email": "jpcxist@gmail.com",
+		"url": "https://github.com/jpcx"
+	},
+	"keywords": [
+		"assert",
+		"assertion",
+		"certify",
+		"value",
+		"variable",
+		"parameter",
+		"type",
+		"check",
+		"typecheck",
+		"range",
+		"between",
+		"error"
+	],
+	"files": [
+		"lib"
+	],
+	"main": "lib/index",
+	"types": "lib/index",
+	"scripts": {
+		"clean": "rimraf lib",
+		"lint": "tslint --force --format verbose \"src/**/*.ts\"",
+		"prepublishOnly": "yarn build && yarn test",
+		"prebuild": "yarn clean && yarn lint && echo Using TypeScript && tsc --version && yarn build-docs",
+		"build": "tsc --pretty",
+		"test": "mocha -r ts-node/register test.ts",
+		"watch": "npm run build -- --watch",
+		"build-docs": "rimraf docs && typedoc --exclude src/detail.ts --out docs src && ts-node scripts/postprocessDocs.ts"
+	},
+	"devDependencies": {
+		"@types/rimraf": "2.*.*",
+		"@types/mocha": "5.*.*",
+		"@types/node": "10.*.*",
+		"mocha": "6.*.*",
+		"rimraf": "2.*.*",
+		"ts-node": "8.*.*",
+		"tslint": "5.*.*",
+		"typedoc": "0.15.*",
+		"typedoc-plugin-external-module-name": "2.*.*",
+		"typedoc-plugin-markdown": "2.*.*",
+		"typescript": "3.*.*"
+	},
+	"engines": {
+    "node" : ">=6.0.0"
   }
 }
