@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [RangeAssertionError](cert_is.rangeassertionerror.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [RangeAssertionError](cert_is.rangeassertionerror.md)
 
 # Class: RangeAssertionError
 
@@ -57,7 +57,7 @@ e.code    // 'ERR_INVALID_RANGE'
 
 \+ **new RangeAssertionError**(`message`: string): *[RangeAssertionError](cert_is.rangeassertionerror.md)*
 
-Defined in src/errors/rangeAssertionError.ts:35
+*Defined in [src/errors/rangeAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeAssertionError.ts#L35)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Name | Type | Default |
 
 • **code**: *string*
 
-Defined in src/errors/rangeAssertionError.ts:35
+*Defined in [src/errors/rangeAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeAssertionError.ts#L35)*
 
 ___
 

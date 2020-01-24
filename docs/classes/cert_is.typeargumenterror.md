@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [TypeArgumentError](cert_is.typeargumenterror.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [TypeArgumentError](cert_is.typeargumenterror.md)
 
 # Class: TypeArgumentError
 
@@ -64,7 +64,7 @@ e.validTypes // ['string', 'number']
 
 \+ **new TypeArgumentError**(`paramName`: string, ...`validTypes`: Array‹string | [AnyConstructorFunction](../modules/cert_is.md#anyconstructorfunction)›): *[TypeArgumentError](cert_is.typeargumenterror.md)*
 
-Defined in src/errors/typeArgumentError.ts:42
+*Defined in [src/errors/typeArgumentError.ts:42](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L42)*
 
 **Parameters:**
 
@@ -81,7 +81,7 @@ Name | Type |
 
 • **code**: *string*
 
-Defined in src/errors/typeArgumentError.ts:41
+*Defined in [src/errors/typeArgumentError.ts:41](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L41)*
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 • **validTypes**? : *Array‹string | [AnyConstructorFunction](../modules/cert_is.md#anyconstructorfunction)›*
 
-Defined in src/errors/typeArgumentError.ts:42
+*Defined in [src/errors/typeArgumentError.ts:42](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/typeArgumentError.ts#L42)*
 
 ___
 

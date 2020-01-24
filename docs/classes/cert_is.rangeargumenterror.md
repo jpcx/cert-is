@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [RangeArgumentError](cert_is.rangeargumenterror.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [RangeArgumentError](cert_is.rangeargumenterror.md)
 
 # Class: RangeArgumentError
 
@@ -77,7 +77,7 @@ e.range   // `42 <= 'foo' < 84`
 
 \+ **new RangeArgumentError**(`paramName`: string, `lower`: number, `upper`: number, `lowerIsInclusive`: boolean, `upperIsInclusive`: boolean): *[RangeArgumentError](cert_is.rangeargumenterror.md)*
 
-Defined in src/errors/rangeArgumentError.ts:49
+*Defined in [src/errors/rangeArgumentError.ts:49](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L49)*
 
 **Parameters:**
 
@@ -97,7 +97,7 @@ Name | Type |
 
 • **code**: *string*
 
-Defined in src/errors/rangeArgumentError.ts:48
+*Defined in [src/errors/rangeArgumentError.ts:48](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L48)*
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 • **range**? : *undefined | string*
 
-Defined in src/errors/rangeArgumentError.ts:49
+*Defined in [src/errors/rangeArgumentError.ts:49](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/rangeArgumentError.ts#L49)*
 
 ___
 
