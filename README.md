@@ -2,6 +2,8 @@
 
 Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.
 
+This project aims to simplify runtime value checking for safety-critical applications.
+
 [![NPM](https://nodei.co/npm/cert-is.png)](https://nodei.co/npm/cert-is/)
 
 [![NPM](https://img.shields.io/github/license/jpcx/cert-is.svg)](https://www.npmjs.com/package/cert-is/)
@@ -11,648 +13,173 @@ Provides a collection of assertion tools for checking strict equality, type, and
 [![NPM](https://img.shields.io/david/jpcx/cert-is.svg)](https://www.npmjs.com/package/cert-is/)
 [![NPM](https://img.shields.io/david/dev/jpcx/cert-is.svg)](https://www.npmjs.com/package/cert-is/)
 
-**Migration Notice:** The error naming scheme has changed from 0.1.2 --> 0.2.1. Please see the [API Documentation](#api) for the new names.
+**Migration Notice 0.2.1 --> 1.0.0:**
+
+ - Certifier.isRange and Checker.isRange have been removed.
+ - Exports are now structured as follows:
+```ts
+export declare function cert(...values: any): Certifier
+export declare function check(...values: any): Checker
+export {
+  Certifier,
+  Checker,
+  RangeArgumentError,
+  RangeAssertionError,
+  TypeArgumentError,
+  TypeAssertionError,
+  ValueArgumentError,
+  ValueAssertionError
+};
+export default cert;
+```
+ - Project has been converted to TypeScript
+
+**Update 1.0.0:**
+
+ - This library has been converted to TypeScript, but development will likely stop here.
+ - Please check out [jpcx/restrict-v](https://github.com/jpcx/restrict-v) instead.
 
 ## Installation
 
 ```console
-npm i cert-is
+yarn add cert-is
 ```
 
 ## Testing
 
 ```console
 cd /path/to/node_modules/cert-is
-npm i -d
-npm test
+yarn install -dev
+yarn test
 ```
 
-## Usage
+## Contribution
 
+Please raise an issue if you find any. Pull requests are welcome!
+
+## Documentation
+
+### Module: cert-is
+
+#### Index
+
+##### Classes
+
+* [Certifier](docs/classes/cert_is.certifier.md)
+* [Checker](docs/classes/cert_is.checker.md)
+* [RangeArgumentError](docs/classes/cert_is.rangeargumenterror.md)
+* [RangeAssertionError](docs/classes/cert_is.rangeassertionerror.md)
+* [TypeArgumentError](docs/classes/cert_is.typeargumenterror.md)
+* [TypeAssertionError](docs/classes/cert_is.typeassertionerror.md)
+* [ValueArgumentError](docs/classes/cert_is.valueargumenterror.md)
+* [ValueAssertionError](docs/classes/cert_is.valueassertionerror.md)
+
+##### Type aliases
+
+* [AnyConstructorFunction](README.md#anyconstructorfunction)
+
+##### Functions
+
+* [cert](README.md#cert)
+* [check](README.md#check)
+
+#### Type aliases
+
+##### AnyConstructorFunction
+
+Ƭ **AnyConstructorFunction**: *object*
+
+Defined in src/certifier.ts:16
+
+Any function that uses new to construct an object.
+
+###### Type declaration:
+
+#### Functions
+
+##### cert
+
+▸ **cert**(...`values`: any): *[Certifier](docs/classes/cert_is.certifier.md)*
+
+Defined in src/index.ts:59
+
+Constructs a Certifier instance given a set of values. All values must pass
+the supplied tests.
+
+**`func`** cert
+
+**`example`** 
 ```js
-const cert = require('cert-is')
-
-// All of the following calls return cert() instance
-cert('foo').is('foo', 'bar', 'baz')
-cert('foo', 42).is('foo', 'bar', 'baz', 42)
-cert('foo').isNot('qux', 'quz')
-cert('foo', 42).isNot('qux', 'quz')
-cert('foo').isType('string')
-cert('foo', {}).isType('string', 'object')
-cert('foo', {}).isType('string', Object)
-cert('foo').isNotType('number')
-cert('foo', {}).isNotType('number', 'symbol')
-cert(42).isRange(32, 52, true, true)
-cert(42, 45).isRange(32, 52, true, true)
-cert(42).isGT(32)
-cert(42, 84).isGT(32)
-cert(42).isGTE(42)
-cert(42, 52).isGTE(42)
-cert(42).isLT(52)
-cert(42, 32).isLT(52)
-cert(42).isLTE(42)
-cert(42, 22).isLTE(42)
-
-// All of the following calls throw errors
-cert('foo').is('bar', 'baz')
-cert('foo', 42).is('foo', 'bar', 'baz')
-cert('foo').isNot('foo', 'qux', 'quz')
-cert('foo', 42).isNot('qux', 'quz', 42)
-cert('foo').isType('number')
-cert('foo', {}).isType('string', 'function')
-cert('foo', {}).isType('string', Array)
-cert('foo').isNotType('string')
-cert('foo', {}).isNotType('number', 'symbol', 'object')
-cert(42).isRange(32, 42, true, false)
-cert(42, 45).isRange(42, 52, false, true)
-cert(42).isGT(42)
-cert(42, 84).isGT(62)
-cert(42).isGTE(52)
-cert(42, 52).isGTE(62)
-cert(42).isLT(42)
-cert(42, 32).isLT(37)
-cert(42).isLTE(32)
-cert(42, 22).isLTE(32)
-
-// Use the cert.check method to avoid throwing errors (invalid argument errors will still throw)
-cert.check('foo').is('foo', 'bar', 'baz') // returns cert.check() instance
-cert.check('foo').is('bar', 'baz')        // returns false
-
-// All cert() and cert.check() methods return their instance if a given test passes
-// As such, multiple tests may be appended to each other
-
-// Returns cert() instance
-cert(42).is(42).isGT(41).isLT(43).isType('number', Number)
-
-// Throws a ValueAssertionError
-cert(42).is('not42').isGT(41).isLT(43).isType('number', Number)
-
-// Throws a TypeAssertionError
-cert(42).is('not42').isGT(41).isLT(43).isType('string')
-
-// Returns cert.check() instance
-cert.check(42).is(42).isGT(41).isLT(43).isType('number', Number)
-
-// Returns false
-cert.check(42).is('not42').isGT(41).isLT(43).isType('number', Number)
-cert.check(42).is(42).isGT(41).isLT(43).isType('string')
-
-// Load a message with cert.message in order to customize the error message
- // Throws ValueAssertionError with message: [ERR_INVALID_VALUE]: 42 is not not 42
-cert(42).message('42 is not not 42').isNot(42)
-cert(42).message('42 is not not 42').is(42)          // returns cert() instance
-cert.check(42).message('42 is not not 42').is(42)    // returns cert.check() instance
-cert.check(42).message('42 is not not 42').isNot(42) // returns false
-```
-
-## API
-
-<!-- Generated by documentation.js. Update this documentation by updating the source code. -->
-
-#### Table of Contents
-
--   [cert-is](#cert-is)
--   [Type](#type)
--   [ValueArgumentError](#valueargumenterror)
--   [TypeArgumentError](#typeargumenterror)
--   [RangeArgumentError](#rangeargumenterror)
--   [ValueAssertionError](#valueassertionerror)
--   [TypeAssertionError](#typeassertionerror)
--   [RangeAssertionError](#rangeassertionerror)
--   [Certifier](#certifier)
-    -   [is](#is)
-    -   [isNot](#isnot)
-    -   [isType](#istype)
-    -   [isNotType](#isnottype)
-    -   [isRange](#isrange)
-    -   [isGT](#isgt)
-    -   [isGTE](#isgte)
-    -   [isLT](#islt)
-    -   [isLTE](#islte)
--   [Checker](#checker)
--   [check](#check)
-
-### cert-is
-
-[index.js:66-654](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L66-L654 "Source code on GitHub")
-
--   **See: [GitHub](http://github.com/jpcx/cert-is)**
-
-Provides a collection of assertion tools for checking strict equality, type, and range of a set of values.
-
-#### Parameters
-
--   `values` **...any** Values used during construction of a new Certifier instance. Certifier methods will operate on these values.
-
-#### Properties
-
--   `check` **[check](#check)** Constructs a new Checker instance.
--   `ValueArgumentError` **[ValueArgumentError](#valueargumenterror)** Reference to the ValueArgumentError class.
--   `TypeArgumentError` **[TypeArgumentError](#typeargumenterror)** Reference to the TypeArgumentError class.
--   `RangeArgumentError` **[RangeArgumentError](#rangeargumenterror)** Reference to the RangeArgumentError class.
--   `ValueAssertionError` **[ValueAssertionError](#valueassertionerror)** Reference to the ValueAssertionError class.
--   `TypeAssertionError` **[TypeAssertionError](#typeassertionerror)** Reference to the TypeAssertionError class.
--   `RangeAssertionError` **[RangeAssertionError](#rangeassertionerror)** Reference to the RangeAssertionError class.
-
-#### Examples
-
-```javascript
-const cert = require('cert-is')
-
 const certifier = cert('foo', 'bar')
 certifier.is('foo') // undefined
 certifier.is('bar') // undefined
 certifier.is('qux') // THROWS ValueAssertionError
 ```
 
-```javascript
-const cert = require('cert-is')
-
-cert('foo').is('foo')                      // returns cert() instance
+**`example`** 
+```js
+cert('foo').is('foo')                      // returns Certifier instance
 cert('foo').is('bar')                      // THROWS ValueAssertionError
-cert('foo').is('foo', 'bar')               // returns cert() instance
+cert('foo').is('foo', 'bar')               // returns Certifier instance
 cert('foo').isNot('foo')                   // THROWS ValueAssertionError
-cert('foo').isType('string')               // returns cert() instance
+cert('foo').isType('string')               // returns Certifier instance
 cert('foo').isType('number')               // THROWS TypeAssertionError
-cert('foo').isType('string', 'number')     // returns cert() instance
-cert(new Map()).isType(Map)                // returns cert() instance
-cert(new Map()).isType(Object)             // returns cert() instance
+cert('foo').isType('string', 'number')     // returns Certifier instance
+cert(new Map()).isType(Map)                // returns Certifier instance
+cert(new Map()).isType(Object)             // returns Certifier instance
 cert(new Map()).isType(Set)                // THROWS TypeAssertionError
-cert(new Map()).isType(Map, Set)           // returns cert() instance
-cert(15).isGT(2)                           // returns cert() instance
+cert(new Map()).isType(Map, Set)           // returns Certifier instance
+cert(15).isGT(2)                           // returns Certifier instance
+cert(15).isGT(2).isLT(17)                  // returns Certifier instance
+cert(18).isGT(17).isLT(2)                  // THROWS RangeAssertionError
 cert(15).isGT(15)                          // THROWS RangeAssertionError
-cert(15).isGTE(15)                         // returns cert() instance
-cert(15, 23).isGTE(15)                     // returns cert() instance
+cert(15).isGTE(15)                         // returns Certifier instance
+cert(15, 23).isGTE(15)                     // returns Certifier instance
 cert(15, 23).isGTE('foo')                  // THROWS TypeArgumentError
-cert(15, 23).isRange(14, 24, false, false) // returns cert() instance
-cert(15, 23).isRange(15, 23, true, true)   // returns cert() instance
-cert(15, 23).isRange(15, 23, true, false)  // THROWS RangeAssertionError
-cert(15, 23).isRange(23, 15, true, true)   // THROWS RangeArgumentError
 ```
 
-```javascript
-const check = require('cert-is').check
+**Parameters:**
 
+Name | Type | Description |
+------ | ------ | ------ |
+`...values` | any | Values to construct Certifier with. |
+
+**Returns:** *[Certifier](docs/classes/cert_is.certifier.md)*
+
+Certifier instance.
+
+___
+
+##### check
+
+▸ **check**(...`values`: any): *[Checker](docs/classes/cert_is.checker.md)*
+
+Defined in src/index.ts:80
+
+Constructs a Checker instance given a set of values. All values must pass
+the supplied tests.
+
+**`func`** check
+
+**`example`** 
+```js
 check('foo').is('foo')        // returns true
-check('foo').is('bar')        // returns check() instance
+check('foo').is('bar')        // returns Checker instance
 check('foo').isType('string') // returns true
 check('foo').isType('bar')    // THROWS TypeArgumentError
 check('foo').isGT('')         // THROWS TypeArgumentError
 ```
 
-```javascript
-const cert = require('cert-is')
-const check = cert.check
+**Parameters:**
 
-cert(15).isGT(2).isLT(18).isType('number')     // returns cert() instance
-cert(15).isGT(2).isLT(-9000).isType('number')  // throws RangeAssertionError
-check(15).isGT(2).isLT(18).isType('number')    // returns check() instance
-check(15).isGT(2).isLT(-9000).isType('number') // returns false
-```
+Name | Type | Description |
+------ | ------ | ------ |
+`...values` | any | Values to construct Checker with. |
 
-Returns **[Certifier](#certifier)** Instance of the [Certifier](#certifier) class that contains methods for certifying the provided values.
+**Returns:** *[Checker](docs/classes/cert_is.checker.md)*
 
-**Meta**
+Checker instance.
 
--   **author**: Justin Collier &lt;jpcxist@gmail.com>
--   **license**: MIT
+## License
 
-### Type
-
-[index.js:68-77](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L68-L77 "Source code on GitHub")
-
-Any value that could potentially refer to a type or constructor.
-
-Type: (`"boolean"` \| `"undefined"` \| `"number"` \| `"string"` \| `"symbol"` \| `"object"` \| `"function"` \| [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))
-
-#### Examples
-
-```javascript
-'string'
-```
-
-```javascript
-Array
-```
-
-### ValueArgumentError
-
-[index.js:104-114](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L104-L114 "Source code on GitHub")
-
-**Extends Error**
-
-Thrown when an argument's value is not an acceptable value.
-
-#### Parameters
-
--   `paramName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the parameter that caused the error.
--   `valid` **...any** Optional list of valid values for the argument. (optional, default `[]`)
-
-#### Properties
-
--   `name` **`"Error"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue. See examples below.
--   `code` **`"ERR_INVALID_ARG_VALUE"`** Error code.
--   `valid` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** Optional list of valid values for the argument. If none are provided to the constructor, this property will not be set.
-
-#### Examples
-
-```javascript
-const e = new ValueArgumentError('foo')
-e.name    // 'Error'
-e.message // '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value'
-e.code    // 'ERR_INVALID_ARG_VALUE'
-```
-
-```javascript
-const e = new ValueArgumentError('foo', 'bar')
-e.name    // 'Error'
-e.message // '[ERR_INVALID_ARG_VALUE]: "foo" has an invalid value'
-e.code    // 'ERR_INVALID_ARG_VALUE'
-e.valid   // ['bar']
-```
-
-### TypeArgumentError
-
-[index.js:141-151](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L141-L151 "Source code on GitHub")
-
-**Extends TypeError**
-
-Thrown when an argument's type is not an acceptable type.
-
-#### Parameters
-
--   `paramName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the parameter that caused the error.
--   `validTypes` **...[Type](#type)** Optional list of valid types for the argument. (optional, default `[]`)
-
-#### Properties
-
--   `name` **`"TypeError"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue. See examples below.
--   `code` **`"ERR_INVALID_ARG_TYPE"`** Error code.
--   `validTypes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)?** Optional list of valid types for the argument. If none are provided to the constructor, this property will not be set.
-
-#### Examples
-
-```javascript
-const e = new TypeArgumentError('foo')
-e.name    // 'TypeError'
-e.message // '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type'
-e.code    // 'ERR_INVALID_ARG_TYPE'
-```
-
-```javascript
-const e = new TypeArgumentError('foo', 'string', 'number')
-e.name       // 'TypeError'
-e.message    // '[ERR_INVALID_ARG_TYPE]: "foo" has an invalid type'
-e.code       // 'ERR_INVALID_ARG_TYPE'
-e.validTypes // ['string', 'number']
-```
-
-### RangeArgumentError
-
-[index.js:186-205](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L186-L205 "Source code on GitHub")
-
-**Extends RangeError**
-
-Thrown when an argument's range is not within an acceptable range.
-
-#### Parameters
-
--   `paramName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the parameter that caused the error.
--   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Optional lower bound of the range.
--   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)?** Optional upper bound of the range.
--   `lowIncl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Optional indicator of an inclusive lower bound.
--   `upIncl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Optional indicator of an inclusive upper bound.
-
-#### Properties
-
--   `name` **`"RangeError"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue. See examples below.
--   `range` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Short description of the range. Only set if all four bound specifiers are provided to the constructor and are the correct types (`lower`: `number`; `upper`: `number`; `lowIncl`: `boolean`; `upIncl`: `boolean`).
--   `code` **`"ERR_INVALID_ARG_RANGE"`** Error code.
-
-#### Examples
-
-```javascript
-const e = new RangeArgumentError('foo')
-e.name    // 'RangeError'
-e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
-e.code    // 'ERR_INVALID_ARG_RANGE'
-```
-
-```javascript
-const e = new RangeArgumentError('foo', 42)
-e.name    // 'RangeError'
-e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
-e.code    // 'ERR_INVALID_ARG_RANGE'
-```
-
-```javascript
-const e = new RangeArgumentError('foo', 42, 84, true, false)
-e.name    // 'RangeError'
-e.message // '[ERR_INVALID_ARG_RANGE]: "foo" has an invalid range'
-e.code    // 'ERR_INVALID_ARG_RANGE'
-e.range   // `42 <= 'foo' < 84`
-```
-
-### ValueAssertionError
-
-[index.js:230-236](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L230-L236 "Source code on GitHub")
-
-**Extends Error**
-
-Thrown when the certifier finds a value is either not expected or is explicitly forbidden.
-
-#### Parameters
-
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Custom message to prepend with '[err_invalid_value]: '.
-
-#### Properties
-
--   `name` **`"Error"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue.
--   `code` **`"ERR_INVALID_VALUE"`** Error code.
-
-#### Examples
-
-```javascript
-const e = new ValueAssertionError()
-e.name    // 'Error'
-e.message // '[ERR_INVALID_VALUE]: Value is invalid'
-e.code    // 'ERR_INVALID_VALUE'
-```
-
-```javascript
-const e = new ValueAssertionError('this is a custom message')
-e.name    // 'Error'
-e.message // '[ERR_INVALID_VALUE]: this is a custom message'
-e.code    // 'ERR_INVALID_VALUE'
-```
-
-### TypeAssertionError
-
-[index.js:261-267](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L261-L267 "Source code on GitHub")
-
-**Extends TypeError**
-
-Thrown when the certifier finds a value with a type that is either not expected or is explicitly forbidden.
-
-#### Parameters
-
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Custom message to prepend with '[err_invalid_type]: '.
-
-#### Properties
-
--   `name` **`"TypeError"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue.
--   `code` **`"ERR_INVALID_TYPE"`** Error code.
-
-#### Examples
-
-```javascript
-const e = new TypeAssertionError()
-e.name    // 'TypeError'
-e.message // '[ERR_INVALID_TYPE]: Value is of an invalid type'
-e.code    // 'ERR_INVALID_TYPE'
-```
-
-```javascript
-const e = new TypeAssertionError('this is a custom message')
-e.name    // 'Error'
-e.message // '[ERR_INVALID_TYPE]: this is a custom message'
-e.code    // 'ERR_INVALID_TYPE'
-```
-
-### RangeAssertionError
-
-[index.js:292-298](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L292-L298 "Source code on GitHub")
-
-**Extends RangeError**
-
-Thrown when the certifier finds a value that is not within an expected range.
-
-#### Parameters
-
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Custom message to prepend with '[err_invalid_range]: '.
-
-#### Properties
-
--   `name` **`"TypeError"`** Name of the error constructor.
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message describing the issue.
--   `code` **`"ERR_INVALID_RANGE"`** Error code.
-
-#### Examples
-
-```javascript
-const e = new RangeAssertionError()
-e.name    // 'RangeError'
-e.message // '[ERR_INVALID_RANGE]: Value is of a prohibited range'
-e.code    // 'ERR_INVALID_RANGE'
-```
-
-```javascript
-const e = new RangeAssertionError('this is a custom message')
-e.name    // 'Error'
-e.message // '[ERR_INVALID_RANGE]: this is a custom message'
-e.code    // 'ERR_INVALID_RANGE'
-```
-
-### Certifier
-
-[index.js:439-584](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L439-L584 "Source code on GitHub")
-
-Given a set of values, provides a collection of assertion tools for checking strict equality, type, and range. Throws the appropriate error if a given test does not pass.
-
-#### Parameters
-
--   `values` **...any** Values to certify.
-
-#### is
-
-[index.js:472-475](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L472-L475 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are strictly equal to any element of `allowed`. Throws if ANY element of `values` is NOT strictly equal to any valid value
-
-##### Parameters
-
--   `valid` **...any** Allowed values.
-
-
--   Throws **[ValueAssertionError](#valueassertionerror)** Throws an ValueAssertionError if the test fails.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isNot
-
-[index.js:485-488](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L485-L488 "Source code on GitHub")
-
-Certifies that All elements of `values` are not strictly equal to any element of `invalid`. Throws if the ANY element of `values` IS strictly equal to any invalid value.
-
-##### Parameters
-
--   `invalid` **...any** Prohibited values.
-
-
--   Throws **[ValueAssertionError](#valueassertionerror)** Throws an ValueAssertionError if the test fails.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isType
-
-[index.js:498-501](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L498-L501 "Source code on GitHub")
-
-Certifies that ALL elements of `values` match any type in `validTypes`. Throws if the type of any element of `values` is NOT strictly equal to any valid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
-
-##### Parameters
-
--   `validTypes` **...[Type](#type)** Allowed types.
-
-
--   Throws **([TypeAssertionError](#typeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an TypeAssertionError if the test fails. Throws an TypeArgumentError if any element of `validTypes` is not a string or function.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isNotType
-
-[index.js:511-514](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L511-L514 "Source code on GitHub")
-
-Certified that All elements of `values` DO NOT match any type in `invalidTypes`. Throws if the type of any element of `values` IS strictly equal to any invalid type. If a given type is a string, checks using `typeof`. If a given type is a function, checks using instanceof.
-
-##### Parameters
-
--   `invalidTypes` **...[Type](#type)** Prohibited types.
-
-
--   Throws **([TypeAssertionError](#typeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an TypeAssertionError if the test fails. Throws an TypeArgumentError if any element of `prohibitedTypes` is not a string or function.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isRange
-
-[index.js:527-530](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L527-L530 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are within the provided range. Either bound may be inclusive or exclusive. Defaults to exclusive for both.
-
-##### Parameters
-
--   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking.
--   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking.
--   `lowIncl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Whether or not the lower bound is inclusive. (optional, default `false`)
--   `upIncl` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Whether or not the upper bound is inclusive. (optional, default `false`)
-
-
--   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if any element of `values`, `lower`, or `upper` are not strict number types. Throws an TypeArgumentError if either `lowIncl` or `upIncl` are not strict boolean types. Throws an RangeArgumentError if `upper` is less than `lower`, or if `upper` is equal to `lower` and either are exclusive.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isGT
-
-[index.js:540-543](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L540-L543 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are greater than a provided lower bound. Throws if any element of `values` is NOT greater than the provided bound. Throws if any element of `values` is not a strict number type, or if `lower` is not a strict number type.
-
-##### Parameters
-
--   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
-
-
--   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `lower` is not a strict number type.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isGTE
-
-[index.js:553-556](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L553-L556 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are greater than or equal to a provided lower bound. Throws if any element of `values` is NOT greater or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `lower` is not a strict number type.
-
-##### Parameters
-
--   `lower` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Lower bound used for range checking
-
-
--   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `lower` is not a strict number type.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isLT
-
-[index.js:566-569](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L566-L569 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are less than a provided upper bound. Throws if any element of `values` is NOT less than the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
-
-##### Parameters
-
--   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking
-
-
--   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `upper` is not a strict number type.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-#### isLTE
-
-[index.js:579-582](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L579-L582 "Source code on GitHub")
-
-Certifies that ALL elements of `values` are less than or equal to a provided upper bound. Throws if any element of `values` is NOT less than or equal to the provided bound. Throws if any element of `values` is not a strict number type or if `upper` is not a strict number type.
-
-##### Parameters
-
--   `upper` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Upper bound used for range checking
-
-
--   Throws **([RangeAssertionError](#rangeassertionerror) \| [TypeArgumentError](#typeargumenterror))** Throws an RangeAssertionError if the test fails. Throws an TypeArgumentError if `upper` is not a strict number type.
-
-Returns **[Certifier](#certifier)** Returns instance for re-use.
-
-### 
-
-[index.js:449](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L449 "Source code on GitHub")
-
-Loads a message into the certifier to provide additional context for
-thrown AssertionErrors.
-
-#### Parameters
-
--   `message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Message to load.
-
-Returns **[Certifier](#certifier)** 
-
-### Checker
-
-[index.js:597-624](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L597-L624 "Source code on GitHub")
-
-**Extends Certifier**
-
-Provides an interface for the Certifier class that performs a given test on the values and returns the result as a boolean rather than throwing an error. Contains all methods associated with a Certifier instance. Methods return `true` if the test passes, and `false` if the test throws an error.
-
-#### Parameters
-
--   `values` **...any** Values to certify.
-
-
--   Throws **[TypeArgumentError](#typeargumenterror)** Throws an TypeArgumentError if the supplied arguments are invalid.
-
-Returns **([Checker](#checker) \| `false`)** Returns the instance for re-use (truthy), or false if the check fails (falsy).
-
-### check
-
-[index.js:639](https://github.com/jpcx/cert-is/blob/0.3.2/index.js#L639 "Source code on GitHub")
-
-Constructs a new Checker instance in order to perform tests without throwing test errors.
-
-#### Parameters
-
--   `values` **...any** Values used during construction of a new Certifier instance. Certifier methods will operate on these values.
-
-#### Examples
-
-```javascript
-check('foo').is('bar')        // false
-check('foo').is('bar', 'foo') // true
-check(123).isGT(42)           // true
-check(123).isGT('foo')        // THROWS TypeArgumentError
-```
-
-Returns **[Checker](#checker)** Returns a new Checker instance with Certifier instance methods capable of testing the supplied values.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
