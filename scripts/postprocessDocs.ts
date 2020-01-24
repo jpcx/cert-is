@@ -145,7 +145,7 @@ const fixModuleDocLinks = (text: string) =>
   text.replace(kAnyLinkRegex, match => {
     const link = match.replace(/\[[^[]+\]\((.+?)\)/, '$1');
     // return match if external link
-    if (link.match(/^:\/\//m)) {
+    if (link.match(/:\/\//m)) {
       return match;
     }
     if (link.match(/^(?:\.\.\/)/m)) {

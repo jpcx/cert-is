@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [Checker](cert_is.checker.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [Checker](cert_is.checker.md)
 
 # Class: Checker
 
@@ -41,7 +41,7 @@ if the test throws an error. All values must pass the supplied tests.
 
 \+ **new Checker**(...`values`: any): *[Checker](cert_is.checker.md)*
 
-Defined in src/checker.ts:127
+*Defined in [src/checker.ts:127](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L127)*
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ Name | Type |
 
 • **is**: *function*
 
-Defined in src/checker.ts:44
+*Defined in [src/checker.ts:44](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L44)*
 
 Certifies that ALL elements of `values` are strictly equal to any element
 of `allowed`. Returns false if ANY element of `values` is NOT strictly
@@ -83,7 +83,7 @@ ___
 
 • **isGT**: *function*
 
-Defined in src/checker.ts:92
+*Defined in [src/checker.ts:92](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L92)*
 
 Certifies that ALL elements of `values` are greater than a provided lower
 bound. Returns false if any element of `values` is NOT greater than the
@@ -110,7 +110,7 @@ ___
 
 • **isGTE**: *function*
 
-Defined in src/checker.ts:104
+*Defined in [src/checker.ts:104](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L104)*
 
 Certifies that ALL elements of `values` are greater than or equal to a
 provided lower bound. Returns false if any element of `values` is NOT
@@ -138,7 +138,7 @@ ___
 
 • **isLT**: *function*
 
-Defined in src/checker.ts:115
+*Defined in [src/checker.ts:115](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L115)*
 
 Certifies that ALL elements of `values` are less than a provided upper
 bound. Returns false if any element of `values` is NOT less than the
@@ -165,7 +165,7 @@ ___
 
 • **isLTE**: *function*
 
-Defined in src/checker.ts:127
+*Defined in [src/checker.ts:127](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L127)*
 
 Certifies that ALL elements of `values` are less than or equal to a
 provided upper bound. Returns false if any element of `values` is NOT
@@ -193,7 +193,7 @@ ___
 
 • **isNot**: *function*
 
-Defined in src/checker.ts:54
+*Defined in [src/checker.ts:54](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L54)*
 
 Certifies that All elements of `values` are not strictly equal to any
 element of `invalid`. Returns false if the ANY element of `values` IS
@@ -219,7 +219,7 @@ ___
 
 • **isNotType**: *function*
 
-Defined in src/checker.ts:79
+*Defined in [src/checker.ts:79](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L79)*
 
 Certified that All elements of `values` DO NOT match any type in
 `invalidTypes`. Returns false if the type of any element of `values` IS
@@ -247,7 +247,7 @@ ___
 
 • **isType**: *function*
 
-Defined in src/checker.ts:65
+*Defined in [src/checker.ts:65](https://github.com/jpcx/cert-is/blob/09879b3/src/checker.ts#L65)*
 
 Certifies that ALL elements of `values` match any type in `validTypes`.
 Returns false if the type of any element of `values` is NOT strictly

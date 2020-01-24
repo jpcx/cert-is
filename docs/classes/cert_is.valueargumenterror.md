@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [ValueArgumentError](cert_is.valueargumenterror.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [ValueArgumentError](cert_is.valueargumenterror.md)
 
 # Class: ValueArgumentError
 
@@ -64,7 +64,7 @@ e.valid   // ['bar']
 
 \+ **new ValueArgumentError**(`paramName`: string, ...`valid`: any): *[ValueArgumentError](cert_is.valueargumenterror.md)*
 
-Defined in src/errors/valueArgumentError.ts:40
+*Defined in [src/errors/valueArgumentError.ts:40](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueArgumentError.ts#L40)*
 
 **Parameters:**
 
@@ -81,7 +81,7 @@ Name | Type |
 
 • **code**: *string*
 
-Defined in src/errors/valueArgumentError.ts:39
+*Defined in [src/errors/valueArgumentError.ts:39](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueArgumentError.ts#L39)*
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 • **valid**? : *any*
 
-Defined in src/errors/valueArgumentError.ts:40
+*Defined in [src/errors/valueArgumentError.ts:40](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueArgumentError.ts#L40)*
 
 ___
 

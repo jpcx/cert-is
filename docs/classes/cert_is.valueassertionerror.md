@@ -1,4 +1,4 @@
-[cert-is - v1.0.0](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [ValueAssertionError](cert_is.valueassertionerror.md)
+[cert-is - v1.0.1](../README.md) › [Globals](../globals.md) › [cert-is](../modules/cert_is.md) › [ValueAssertionError](cert_is.valueassertionerror.md)
 
 # Class: ValueAssertionError
 
@@ -57,7 +57,7 @@ e.code    // 'ERR_INVALID_VALUE'
 
 \+ **new ValueAssertionError**(`message`: string): *[ValueAssertionError](cert_is.valueassertionerror.md)*
 
-Defined in src/errors/valueAssertionError.ts:35
+*Defined in [src/errors/valueAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueAssertionError.ts#L35)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Name | Type | Default |
 
 • **code**: *string*
 
-Defined in src/errors/valueAssertionError.ts:35
+*Defined in [src/errors/valueAssertionError.ts:35](https://github.com/jpcx/cert-is/blob/09879b3/src/errors/valueAssertionError.ts#L35)*
 
 ___
 
